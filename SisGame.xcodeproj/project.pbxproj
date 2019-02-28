@@ -13,6 +13,22 @@
 		8720E2EA220E1D9500B20EA0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8720E2E9220E1D9500B20EA0 /* Assets.xcassets */; };
 		8720E2ED220E1D9500B20EA0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8720E2EB220E1D9500B20EA0 /* LaunchScreen.storyboard */; };
 		8720E2F5220E1F1900B20EA0 /* SampleScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8720E2F4220E1F1900B20EA0 /* SampleScene.swift */; };
+		96F8A8FF22289562009DEE0F /* Interactive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A8FE22289562009DEE0F /* Interactive.swift */; };
+		96F8A901222895AD009DEE0F /* Noninteractive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A900222895AD009DEE0F /* Noninteractive.swift */; };
+		96F8A903222895EB009DEE0F /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A902222895EB009DEE0F /* World.swift */; };
+		96F8A905222895F5009DEE0F /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A904222895F5009DEE0F /* Wall.swift */; };
+		96F8A907222895FF009DEE0F /* Boundary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A906222895FF009DEE0F /* Boundary.swift */; };
+		96F8A90922289618009DEE0F /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A90822289618009DEE0F /* Player.swift */; };
+		96F8A90B2228963D009DEE0F /* Contactable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A90A2228963D009DEE0F /* Contactable.swift */; };
+		96F8A90D22289651009DEE0F /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A90C22289651009DEE0F /* Enemy.swift */; };
+		96F8A90F22289659009DEE0F /* Well.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A90E22289659009DEE0F /* Well.swift */; };
+		96F8A9122228969D009DEE0F /* Spikes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A9112228969D009DEE0F /* Spikes.swift */; };
+		96F8A916222896DA009DEE0F /* Parallax.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A915222896DA009DEE0F /* Parallax.swift */; };
+		96F8A91A2228A2C2009DEE0F /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A9192228A2C2009DEE0F /* Coin.swift */; };
+		96F8A91C2228A2E3009DEE0F /* Brick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A91B2228A2E3009DEE0F /* Brick.swift */; };
+		96F8A91E2228A44B009DEE0F /* StaminaBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A91D2228A44B009DEE0F /* StaminaBar.swift */; };
+		96F8A9202228A4CD009DEE0F /* DeathWallEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A91F2228A4CD009DEE0F /* DeathWallEffects.swift */; };
+		96F8A9222228A663009DEE0F /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A9212228A663009DEE0F /* Camera.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +40,22 @@
 		8720E2EC220E1D9500B20EA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8720E2EE220E1D9500B20EA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8720E2F4220E1F1900B20EA0 /* SampleScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleScene.swift; sourceTree = "<group>"; };
+		96F8A8FE22289562009DEE0F /* Interactive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactive.swift; sourceTree = "<group>"; };
+		96F8A900222895AD009DEE0F /* Noninteractive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Noninteractive.swift; sourceTree = "<group>"; };
+		96F8A902222895EB009DEE0F /* World.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
+		96F8A904222895F5009DEE0F /* Wall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
+		96F8A906222895FF009DEE0F /* Boundary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Boundary.swift; sourceTree = "<group>"; };
+		96F8A90822289618009DEE0F /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		96F8A90A2228963D009DEE0F /* Contactable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contactable.swift; sourceTree = "<group>"; };
+		96F8A90C22289651009DEE0F /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
+		96F8A90E22289659009DEE0F /* Well.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Well.swift; sourceTree = "<group>"; };
+		96F8A9112228969D009DEE0F /* Spikes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spikes.swift; sourceTree = "<group>"; };
+		96F8A915222896DA009DEE0F /* Parallax.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parallax.swift; sourceTree = "<group>"; };
+		96F8A9192228A2C2009DEE0F /* Coin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
+		96F8A91B2228A2E3009DEE0F /* Brick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brick.swift; sourceTree = "<group>"; };
+		96F8A91D2228A44B009DEE0F /* StaminaBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaminaBar.swift; sourceTree = "<group>"; };
+		96F8A91F2228A4CD009DEE0F /* DeathWallEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeathWallEffects.swift; sourceTree = "<group>"; };
+		96F8A9212228A663009DEE0F /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +72,7 @@
 		8720E2D0220E1D9400B20EA0 = {
 			isa = PBXGroup;
 			children = (
+				96F8A91822289805009DEE0F /* Objects */,
 				8720E2DB220E1D9400B20EA0 /* SisGame */,
 				8720E2DA220E1D9400B20EA0 /* Products */,
 			);
@@ -65,6 +98,29 @@
 				8720E2EE220E1D9500B20EA0 /* Info.plist */,
 			);
 			path = SisGame;
+			sourceTree = "<group>";
+		};
+		96F8A91822289805009DEE0F /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				96F8A8FE22289562009DEE0F /* Interactive.swift */,
+				96F8A900222895AD009DEE0F /* Noninteractive.swift */,
+				96F8A902222895EB009DEE0F /* World.swift */,
+				96F8A904222895F5009DEE0F /* Wall.swift */,
+				96F8A906222895FF009DEE0F /* Boundary.swift */,
+				96F8A90822289618009DEE0F /* Player.swift */,
+				96F8A90A2228963D009DEE0F /* Contactable.swift */,
+				96F8A90C22289651009DEE0F /* Enemy.swift */,
+				96F8A90E22289659009DEE0F /* Well.swift */,
+				96F8A9112228969D009DEE0F /* Spikes.swift */,
+				96F8A915222896DA009DEE0F /* Parallax.swift */,
+				96F8A9192228A2C2009DEE0F /* Coin.swift */,
+				96F8A91B2228A2E3009DEE0F /* Brick.swift */,
+				96F8A91D2228A44B009DEE0F /* StaminaBar.swift */,
+				96F8A91F2228A4CD009DEE0F /* DeathWallEffects.swift */,
+				96F8A9212228A663009DEE0F /* Camera.swift */,
+			);
+			path = Objects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,8 +194,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96F8A903222895EB009DEE0F /* World.swift in Sources */,
+				96F8A9202228A4CD009DEE0F /* DeathWallEffects.swift in Sources */,
+				96F8A91C2228A2E3009DEE0F /* Brick.swift in Sources */,
+				96F8A90F22289659009DEE0F /* Well.swift in Sources */,
+				96F8A91E2228A44B009DEE0F /* StaminaBar.swift in Sources */,
 				8720E2F5220E1F1900B20EA0 /* SampleScene.swift in Sources */,
+				96F8A91A2228A2C2009DEE0F /* Coin.swift in Sources */,
+				96F8A905222895F5009DEE0F /* Wall.swift in Sources */,
+				96F8A916222896DA009DEE0F /* Parallax.swift in Sources */,
+				96F8A90D22289651009DEE0F /* Enemy.swift in Sources */,
+				96F8A901222895AD009DEE0F /* Noninteractive.swift in Sources */,
+				96F8A9122228969D009DEE0F /* Spikes.swift in Sources */,
+				96F8A9222228A663009DEE0F /* Camera.swift in Sources */,
 				8720E2E5220E1D9400B20EA0 /* GameViewController.swift in Sources */,
+				96F8A907222895FF009DEE0F /* Boundary.swift in Sources */,
+				96F8A8FF22289562009DEE0F /* Interactive.swift in Sources */,
+				96F8A90922289618009DEE0F /* Player.swift in Sources */,
+				96F8A90B2228963D009DEE0F /* Contactable.swift in Sources */,
 				8720E2DD220E1D9400B20EA0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
