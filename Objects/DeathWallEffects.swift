@@ -10,7 +10,9 @@ import Foundation
 
 
 class DeathWallEffects:Noninteractive{
-    
+    /**
+     A comment for animation
+    */
     var animation: Any!
     var gradient: Any!
     var distance: Int!

@@ -11,18 +11,6 @@ import SpriteKit
 
 
 
-/* Todo */
-// - 1. Set up basic scene
-// - 2. Add ball
-// 3. Move ball
-// 4. bounce ball on edge
-// 5. bounce ball on object
-// 7. Bounce ball add gravity
-// 8. Detect Touch
-// 9. Detect drag
-// 10. increase accelleration to ball with drag
-// 11. Increase acceleration in direction with drag.
-
 //SKScenes are the "view" equivalant for sprite kit.
 class SampleScene: SKScene {
     private var mainNode:SKNode?

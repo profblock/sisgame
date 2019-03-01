@@ -22,4 +22,8 @@ class Interactive: SKNode {
         
     }
     
+    func isTouched()-> Bool{
+        fatalError("Abstact Method, must be overrided")
+    }
+    
 }
