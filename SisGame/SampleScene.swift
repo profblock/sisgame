@@ -17,7 +17,7 @@ class SampleScene: SKScene {
 
     // Shape node might be approriate for ball and maybe approriate for other shapes, but
     // too many can impact performance
-    private var ball : SKShapeNode?
+    private var ball : SKSpriteNode?
     private var ball2 : SKShapeNode?
     private var chargeValue:CGFloat!
     private var startPoint:CGPoint?

@@ -15,20 +15,35 @@ class Player:Interactive{
     // TODO: Stamina
     
     
-    var stamina: Int!
+    var stamina: Int! // Not implemented
     
-    override init() {
-        super.init()
-        let tempPath = CGMutablePath()
-        tempPath.addArc(center: CGPoint.zero, radius: 32.5, startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: true)
-        self.path = tempPath
-        self.lineWidth = 1
-        self.fillColor = .white
-        self.fillTexture = SKTexture(imageNamed: "sface.png")
+    convenience init() {
+        // convenience constructer
+        
+        let texture = SKTexture(imageNamed: "sface.png")
+        self.init(texture: texture, color: .white, size: CGSize(width: 40, height: 40))
+        
+        
+    }
+    
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        super.init(texture: texture, color: color, size: size)
+        
+        
+        self.color = .white
         self.position = CGPoint(x: 320, y: 320)
-        self.physicsBody = SKPhysicsBody(polygonFrom: self.path!)
+
+        // Add the physicsBody and configure it's properties
+        self.physicsBody = SKPhysicsBody(circleOfRadius: self.size.width/2.0)
         self.physicsBody?.usesPreciseCollisionDetection = true
         self.physicsBody?.friction = 1.0
+        
+        // Make a SKShapeNode that will act as the outline of Player
+        let shapeNode = SKShapeNode(circleOfRadius: self.size.width/2.0)
+        shapeNode.lineWidth = 1
+        shapeNode.strokeColor = .white
+        shapeNode.fillColor = .clear
+        addChild(shapeNode)
     }
     
     
