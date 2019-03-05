@@ -37,23 +37,10 @@ class SampleScene: SKScene {
                              CGPoint(x: 0, y: -20)]
         
         //self.ball = SKShapeNode(ellipseOf: CGSize(width: w, height: w))
-        self.ball = SKShapeNode(points: &hexagonPoints, count: 6)
-        self.ball?.position = CGPoint(x: 320, y: 320)
-        self.ball?.fillColor = UIColor.red
-        //self.ball?.physicsBody = SKPhysicsBody(circleOfRadius: w/2)
-        self.ball?.physicsBody = SKPhysicsBody(polygonFrom: self.ball!.path!)
-        self.ball?.physicsBody?.usesPreciseCollisionDetection = true
-        self.ball?.physicsBody?.friction = 1.0
-
+        //self.ball = SKShapeNode(points: &hexagonPoints, count: 6)
+        self.ball = Player()
         
-        self.ball2 = SKShapeNode(ellipseOf: CGSize(width: w, height: w))
-        self.ball2?.position = CGPoint(x: 200, y: 320)
-        self.ball2?.fillColor = UIColor.blue
-        self.ball2?.physicsBody = SKPhysicsBody(circleOfRadius: w/2)
-        self.ball2?.physicsBody?.usesPreciseCollisionDetection = true
-        self.ball2?.physicsBody?.friction = 1.0
 
-        
         // Create the ground node and physics body
         var splinePoints = [CGPoint(x: 0, y: 500),
                             CGPoint(x: 100, y: 50),
@@ -64,13 +51,13 @@ class SampleScene: SKScene {
                                  count: splinePoints.count)
         ground.lineWidth = 5
         ground.physicsBody = SKPhysicsBody(edgeChainFrom: ground.path!)
-        ground.physicsBody?.restitution = 1.0
+        ground.physicsBody?.restitution = 0.25
         ground.physicsBody?.isDynamic = false
         ground.physicsBody?.friction = 1.0
         
         // Add the two nodes to the scene
         mainNode?.addChild(self.ball!)
-        mainNode?.addChild(self.ball2!)
+        //mainNode?.addChild(self.ball2!)
         mainNode?.addChild(ground)
         
         self.addChild(mainNode!)

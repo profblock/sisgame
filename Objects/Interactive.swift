@@ -10,7 +10,7 @@ import Foundation
 import SpriteKit
 
 
-class Interactive: SKNode {
+class Interactive: SKShapeNode {
     
     var image:SKSpriteNode!
     var categoryBitMask: UInt32!
@@ -18,8 +18,11 @@ class Interactive: SKNode {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder);
-        fatalError("init(coder:) has not been implemented")
-        
+        fatalError("init(coder:) has not been implemented, please use init()")
+    }
+    
+    override init(){
+        super.init()
     }
     
     func isTouched()-> Bool{

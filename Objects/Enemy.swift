@@ -11,7 +11,7 @@ import Foundation
 
 class Enemy: Contactable{
     
-    var path:Any!
+    var path1:Any!
     
     
 }
