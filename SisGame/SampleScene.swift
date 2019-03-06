@@ -47,17 +47,13 @@ class SampleScene: SKScene {
                             CGPoint(x: 400, y: 110),
                             CGPoint(x: 640, y: 20)]
         
-        let ground = SKShapeNode(splinePoints: &splinePoints,
-                                 count: splinePoints.count)
-        ground.lineWidth = 5
-        ground.physicsBody = SKPhysicsBody(edgeChainFrom: ground.path!)
-        ground.physicsBody?.restitution = 0.25
-        ground.physicsBody?.isDynamic = false
-        ground.physicsBody?.friction = 1.0
+        let ground = Boundary()
+        let wall = Wall()
+        
         
         // Add the two nodes to the scene
         mainNode?.addChild(self.ball!)
-        //mainNode?.addChild(self.ball2!)
+        mainNode?.addChild(wall)
         mainNode?.addChild(ground)
         
         self.addChild(mainNode!)
