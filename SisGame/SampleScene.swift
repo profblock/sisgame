@@ -18,6 +18,7 @@ class SampleScene: SKScene {
     // Shape node might be approriate for ball and maybe approriate for other shapes, but
     // too many can impact performance
     private var ball : Player?
+    private var wall : Wall?
     private var previousPosition: CGPoint!
     private var chargeValue:CGFloat!
     private var startPoint:CGPoint?
@@ -28,35 +29,17 @@ class SampleScene: SKScene {
     override func didMove(to view: SKView) {
         
         mainNode = SKNode()
-        chargeValue = 0.0
-        // Create shape node to use during mouse interaction
-        let w = (self.size.width + self.size.height) * 0.05
-        var hexagonPoints = [CGPoint(x: 0, y: -20),
-                             CGPoint(x: -19, y: -6),
-                             CGPoint(x: -12, y: 16),
-                             CGPoint(x: 12, y: 16),
-                             CGPoint(x: 19, y: -6),
-                             CGPoint(x: 0, y: -20)]
         
-        //self.ball = SKShapeNode(ellipseOf: CGSize(width: w, height: w))
-        //self.ball = SKShapeNode(points: &hexagonPoints, count: 6)
         self.ball = Player()
-        previousPosition = ball!.position
         
 
-        // Create the ground node and physics body
-        var splinePoints = [CGPoint(x: 0, y: 500),
-                            CGPoint(x: 100, y: 50),
-                            CGPoint(x: 400, y: 110),
-                            CGPoint(x: 640, y: 20)]
-        
         let ground = Boundary()
-        let wall = Wall()
+        wall = Wall()
         
         
         // Add the two nodes to the scene
         mainNode?.addChild(self.ball!)
-        mainNode?.addChild(wall)
+        mainNode?.addChild(self.wall!)
         mainNode?.addChild(ground)
         
         self.addChild(mainNode!)
@@ -65,6 +48,10 @@ class SampleScene: SKScene {
         self.camera = myCamera
         self.addChild(myCamera)
         
+    }
+    
+    override func didFinishUpdate() {
+        self.wall!.moveWall()
     }
     
     

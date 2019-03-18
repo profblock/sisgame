@@ -35,6 +35,9 @@ class Wall: SKShapeNode {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func moveWall(){
+        self.position.x += 1
+    }
     
     
 }
