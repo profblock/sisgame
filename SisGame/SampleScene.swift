@@ -17,10 +17,12 @@ class SampleScene: SKScene {
 
     // Shape node might be approriate for ball and maybe approriate for other shapes, but
     // too many can impact performance
-    private var ball : SKSpriteNode?
-    private var ball2 : SKShapeNode?
+    private var ball : Player?
+    private var previousPosition: CGPoint!
     private var chargeValue:CGFloat!
     private var startPoint:CGPoint?
+    
+    private var myCamera:Camera!
     
     //didMove is the method that is called when the system is loaded.
     override func didMove(to view: SKView) {
@@ -39,6 +41,7 @@ class SampleScene: SKScene {
         //self.ball = SKShapeNode(ellipseOf: CGSize(width: w, height: w))
         //self.ball = SKShapeNode(points: &hexagonPoints, count: 6)
         self.ball = Player()
+        previousPosition = ball!.position
         
 
         // Create the ground node and physics body
@@ -58,9 +61,43 @@ class SampleScene: SKScene {
         
         self.addChild(mainNode!)
         //self.addChild(self.ball!)
-        
+        myCamera = Camera()
+        self.camera = myCamera
+        self.addChild(myCamera)
         
     }
+    
+    func centerOnBall() {
+        //Trying something here that should smooth out the camera motion
+        //move camera using lerp
+        //http://www.learn-to-code-london.co.uk/blog/2016/04/smoother-camera-motion-in-spritekit-using-lerp/
+        guard ball != nil else {
+            return
+        }
+        //TODO: Update constants with real values
+        let currentPosition = ball!.position
+        let x = (weightedFactor(previous: previousPosition.x, current: currentPosition.x, currentWeight: 0.03) + 200)
+        let y = (weightedFactor(previous: previousPosition.y, current: currentPosition.y, currentWeight: 0.03) + 75)
+        previousPosition = currentPosition;
+        
+        self.camera?.run(SKAction.move(to: CGPoint(x: x, y: y), duration: 0.01))
+        
+    }
+    
+    /* This is allso called a propertial intergral controller (PI)
+     * It's a very dumb one because it only works on one data point (the previous).
+     * This weights the preivous value some fraction (1-currentWeight) and the current (currentWeight)
+     * if weight is less than 0 or greater than 1, then just return current
+     */
+    func weightedFactor(previous: CGFloat, current:CGFloat, currentWeight:CGFloat)->CGFloat{
+        if currentWeight >= 0 && currentWeight <= 1.0 {
+            return (1 - currentWeight) * previous + currentWeight * current;
+        } else {
+            return current
+        }
+        
+    }
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first{
@@ -90,6 +127,12 @@ class SampleScene: SKScene {
         }
         
     }
+    
+    override func didSimulatePhysics() {
+        myCamera.trackBall(ball: ball!)
+    }
+    
+    
     
 //    override func didFinishUpdate() {
 //        let xPos = self.size.width/2.0 - ball!.position.x

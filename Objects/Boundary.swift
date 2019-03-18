@@ -41,7 +41,7 @@ class Boundary: SKShapeNode{
         var ceilingSplinePoints = createCeilingSpline(floorPoints: floorSplinePoints)
         let ceiling = SKShapeNode(splinePoints: &ceilingSplinePoints, count: lengthOfSpline)
         ceiling.lineWidth = 5
-        ceiling.physicsBody = SKPhysicsBody(edgeChainFrom: floor.path!)
+        ceiling.physicsBody = SKPhysicsBody(edgeChainFrom: ceiling.path!)
         ceiling.physicsBody?.restitution = 0.25
         ceiling.physicsBody?.isDynamic = false
         ceiling.physicsBody?.friction = 1.0
