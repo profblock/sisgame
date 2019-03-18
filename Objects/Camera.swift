@@ -16,6 +16,7 @@ class Camera: SKCameraNode{
     
     override init() {
         super.init()
+        self.setScale(1.1) // This is mostly for observing the state of the world as we work on things
         previousPosition = self.position
     }
     

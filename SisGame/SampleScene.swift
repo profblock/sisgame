@@ -67,42 +67,11 @@ class SampleScene: SKScene {
         
     }
     
-    func centerOnBall() {
-        //Trying something here that should smooth out the camera motion
-        //move camera using lerp
-        //http://www.learn-to-code-london.co.uk/blog/2016/04/smoother-camera-motion-in-spritekit-using-lerp/
-        guard ball != nil else {
-            return
-        }
-        //TODO: Update constants with real values
-        let currentPosition = ball!.position
-        let x = (weightedFactor(previous: previousPosition.x, current: currentPosition.x, currentWeight: 0.03) + 200)
-        let y = (weightedFactor(previous: previousPosition.y, current: currentPosition.y, currentWeight: 0.03) + 75)
-        previousPosition = currentPosition;
-        
-        self.camera?.run(SKAction.move(to: CGPoint(x: x, y: y), duration: 0.01))
-        
-    }
-    
-    /* This is allso called a propertial intergral controller (PI)
-     * It's a very dumb one because it only works on one data point (the previous).
-     * This weights the preivous value some fraction (1-currentWeight) and the current (currentWeight)
-     * if weight is less than 0 or greater than 1, then just return current
-     */
-    func weightedFactor(previous: CGFloat, current:CGFloat, currentWeight:CGFloat)->CGFloat{
-        if currentWeight >= 0 && currentWeight <= 1.0 {
-            return (1 - currentWeight) * previous + currentWeight * current;
-        } else {
-            return current
-        }
-        
-    }
-    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first{
             print("Touches started")
-            startPoint = touch.location(in: self)
+            startPoint = touch.location(in: self.view)
             print("x:\(touch.location(in: self).x),y:\(touch.location(in: self).y) ")
         }
     }
@@ -110,19 +79,35 @@ class SampleScene: SKScene {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first{
             print("Touches moved")
-            print("x:\(touch.location(in: self).x),y:\(touch.location(in: self).y) ")
+            print("x:\(touch.location(in: self.view).x),y:\(touch.location(in: self.view).y) ")
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first, let startPoint = self.startPoint{
-            print("Touches ENDED")
             
-            let endPoint = touch.location(in: self)
-            print("x:\(touch.location(in: self).x),y:\(touch.location(in: self).y) ")
-
-            let factor : CGFloat = 1.0
-            let charge = CGVector(dx: factor*(startPoint.x - endPoint.x), dy: factor*(startPoint.y - endPoint.y))
+            //physicsWorld.speed = 1
+            //normalSpeed()
+            
+            let endPoint = touch.location(in: self.view)
+            let dx = startPoint.x - endPoint.x
+            let dy = startPoint.y - endPoint.y
+            let mag = pow(pow(dx, 2.0) + pow(dy, 2.0),0.5)
+            let minVel = CGFloat(20.0) //made this up
+            let maxVel = CGFloat(50.0) //made this up
+            let scalingFactor = CGFloat(0.5) //made this up
+            let uncappedNewMag = scalingFactor*mag + minVel
+            let newVelMag = uncappedNewMag <= maxVel ? uncappedNewMag : maxVel
+            
+            let newDX = dx/mag * newVelMag
+            let newDY = dx/mag * newVelMag
+            
+            
+            
+            let charge = CGVector(dx: newDX, dy: newDY)
+            
+            
+            
             ball?.physicsBody?.applyImpulse(charge)
         }
         

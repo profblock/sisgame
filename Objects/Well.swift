@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SpriteKit
 
 
 class Well:World{
@@ -15,4 +16,12 @@ class Well:World{
     var isOn:Bool!
     var wellRadius: Double!
     var gravityRadius: Double!
+    
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        super.init(texture: texture, color: color, size: size)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
