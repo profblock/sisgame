@@ -38,7 +38,8 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
     private var isLauncherOnScreen = false
     private var staminaBar: StaminaBar!
     
-    let debug : Bool = false
+    //Change to false enable death wall
+    let debug : Bool = true
     
     //didMove is the method that is called when the system is loaded.
     override func didMove(to view: SKView) {
