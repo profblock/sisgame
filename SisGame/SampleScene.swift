@@ -62,7 +62,6 @@ class SampleScene: SKScene {
         if let touch = touches.first{
             print("Touches started")
             startPoint = touch.location(in: self.myCamera)
-            print("Startpoint is \(startPoint)")
             print(myCamera.leftScreen.contains(touch.location(in: self.myCamera)))
 
             if(myCamera.pauseButton.contains(touch.location(in: self.myCamera))){
@@ -75,9 +74,9 @@ class SampleScene: SKScene {
                 
             } else if(myCamera.leftScreen.contains(touch.location(in: self.myCamera))){
                 // Only allow launching if we have stamina
-                if ball.stamina! > CGFloat(0) {
+                if ball.stamina > CGFloat(0) {
                     //lightPause()
-                    launcher?.create(tap: touch.location(in: self.myCamera), stamina: ball.stamina!)
+                    launcher?.create(tap: touch.location(in: self.myCamera), stamina: ball.stamina)
                     isLauncherOnScreen = true;
                 }
             } else if(myCamera.rightScreen.contains(touch.location(in: self.myCamera))){
@@ -100,9 +99,9 @@ class SampleScene: SKScene {
             print("Touches moved")
             if(myCamera.leftScreen.contains(self.startPoint!) && isLauncherOnScreen == true){
                 print("x:\(touch.location(in: self.view).x),y:\(touch.location(in: self.view).y) ")
-                launcher?.repaint(curTap: touch.location(in: self.myCamera), stamina: ball.stamina!)
+                launcher?.repaint(curTap: touch.location(in: self.myCamera), stamina: ball.stamina)
                 //ball.stamina = ball.stamina - 1
-                if(ball.stamina! < CGFloat(0)) {
+                if(ball.stamina < CGFloat(0)) {
                     ball.stamina = 0
                     launcher?.destroy()
                     isLauncherOnScreen = false
@@ -153,12 +152,14 @@ class SampleScene: SKScene {
     }
     
     override func update(_ currentTime: TimeInterval) {
+        let staminaDecreaseRate : CGFloat = 0.5
+        let staminaIncreaseRate : CGFloat = 0.5
         if (isLauncherOnScreen == false){
             if(ball.stamina < ball.maxStamina){
-                ball.stamina += 0.5
+                ball.stamina += staminaIncreaseRate
             }
         } else {
-            ball.stamina -= 0.5
+            ball.stamina -= staminaDecreaseRate
             launcher?.repaint(stamina: ball.stamina)
         }
         staminaBar.changeStamina(newStamina: ball.stamina)

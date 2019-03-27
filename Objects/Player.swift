@@ -15,20 +15,20 @@ class Player:Interactive{
     // TODO: Stamina
     
     
-    var stamina: CGFloat!
     var maxStamina: CGFloat = 100
+    var stamina: CGFloat
+    var projectedStaminaLoss : CGFloat = 0.0
+    
     
     convenience init() {
         // convenience constructer
-        
         let texture = SKTexture(imageNamed: "sface.png")
         self.init(texture: texture, color: .white, size: CGSize(width: 40, height: 40))
-        self.stamina = 100.0
-        
-        
+
     }
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        self.stamina = maxStamina
         super.init(texture: texture, color: color, size: size)
         
         

@@ -31,7 +31,7 @@ class StaminaBar: Noninteractive{
     
     func initHelper(){
         let sisScene = self.scene! as! SampleScene
-        stamina = { return sisScene.ball.stamina! }()
+        stamina = { return sisScene.ball.stamina }()
         screenRegionXBound = self.scene!.view!.bounds.maxX
         screenRegionYBound = self.scene!.view!.bounds.maxY
         let staminaVertOffset : CGFloat = 30.0
