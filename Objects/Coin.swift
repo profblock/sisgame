@@ -17,6 +17,10 @@ class Coin: Contactable{
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         
         super.init(texture: texture, color: color, size: size)
+        
+        self.physicsBody?.contactTestBitMask = PhysicsCategory.Ball
+        self.physicsBody?.categoryBitMask = PhysicsCategory.Coin
+        self.physicsBody?.collisionBitMask = PhysicsCategory.None
     }
     
     required init?(coder aDecoder: NSCoder) {

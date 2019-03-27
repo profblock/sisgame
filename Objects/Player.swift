@@ -40,6 +40,12 @@ class Player:Interactive{
         self.physicsBody?.usesPreciseCollisionDetection = true
         self.physicsBody?.friction = 1.0
         
+        self.physicsBody?.contactTestBitMask = PhysicsCategory.Ball
+        self.physicsBody?.categoryBitMask = PhysicsCategory.Ball
+        self.physicsBody?.collisionBitMask = PhysicsCategory.Ball | PhysicsCategory.Ground | PhysicsCategory.Wall
+        self.physicsBody?.fieldBitMask = PhysicsCategory.Field
+        
+        
         // Make a SKShapeNode that will act as the outline of Player
         let shapeNode = SKShapeNode(circleOfRadius: self.size.width/2.0)
         shapeNode.lineWidth = 1
