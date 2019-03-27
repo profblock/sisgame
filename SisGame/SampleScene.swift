@@ -9,15 +9,25 @@
 import UIKit
 import SpriteKit
 
-
+struct PhysicsCategory {
+    static let None      : UInt32 = 0
+    static let All       : UInt32 = UInt32.max
+    static let Ball   : UInt32 = 0b1       // 1
+    static let Ground: UInt32 = 0b10      // 2
+    static let Coin: UInt32 = 0b100      // 4
+    static let Wall: UInt32 = 0b1000      // 8
+    static let Field: UInt32 = 0b10000      // 16
+}
 
 //SKScenes are the "view" equivalant for sprite kit.
-class SampleScene: SKScene {
+class SampleScene: SKScene, SKPhysicsContactDelegate {
+    
     private var mainNode:SKNode?
 
     
     var ball : Player = Player()
-    private var wall : Wall!
+    private var deathWall : Wall!
+    private var safeWall : Wall!
     private var previousPosition: CGPoint!
     private var chargeValue:CGFloat!
     private var startPoint:CGPoint?
@@ -28,19 +38,24 @@ class SampleScene: SKScene {
     private var isLauncherOnScreen = false
     private var staminaBar: StaminaBar!
     
+    let debug : Bool = false
+    
     //didMove is the method that is called when the system is loaded.
     override func didMove(to view: SKView) {
+        
+        physicsWorld.contactDelegate = self
         
         staminaBar = StaminaBar(stamina: ball.stamina)
         
 
         let ground = Boundary()
-        wall = Wall()
-        
+        deathWall = Wall(startX: -300.0, color: .red, doesKill: true)
+        safeWall = Wall(startX: 0.0, color: .blue, doesKill: false)
         
         // Add the two nodes to the scene
         self.addChild(self.ball)
-        self.addChild(self.wall!)
+        self.addChild(self.deathWall!)
+        self.addChild(self.safeWall!)
         self.addChild(ground)
         
         myCamera = Camera()
@@ -54,7 +69,7 @@ class SampleScene: SKScene {
     }
     
     override func didFinishUpdate() {
-        self.wall!.moveWall()
+        self.deathWall!.moveWall()
     }
     
     
@@ -164,6 +179,47 @@ class SampleScene: SKScene {
         staminaBar.changeStamina(newStamina: ball.stamina)
     }
     
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        
+        //        print("A collision")
+        // 1
+        var firstBody: SKPhysicsBody
+        var secondBody: SKPhysicsBody
+        
+        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
+            firstBody = contact.bodyA
+            secondBody = contact.bodyB
+        } else {
+            firstBody = contact.bodyB
+            secondBody = contact.bodyA
+        }
+        
+        // 2
+        if ((firstBody.categoryBitMask & PhysicsCategory.Ball != 0) &&
+            (secondBody.categoryBitMask & PhysicsCategory.Coin != 0)) {
+            print("Contact")
+            // _ here is the ball, but we never reference it
+            if let _ = firstBody.node as? SKShapeNode, let
+                coin = secondBody.node as? SKShapeNode {
+                //                print("A collision between the ball and coin")
+                coin.removeFromParent()
+                return // No need for more collision checks if we accomplished our goal
+                
+                //                projectileDidCollideWithMonster(projectile: projectile, monster: monster)
+            }
+        }
+        
+        if ((firstBody.categoryBitMask & PhysicsCategory.Ball != 0) &&
+            (secondBody.categoryBitMask & PhysicsCategory.Wall != 0)) {
+            //            print("Ball hit wall")
+            if(debug == false) {
+                let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
+                let gameOverScene = GameOverScene(size: self.size, won: false)
+                self.view?.presentScene(gameOverScene, transition: reveal)
+            }
+        }
+    }
     
     
 //    override func didFinishUpdate() {
