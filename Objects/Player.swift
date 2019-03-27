@@ -17,7 +17,6 @@ class Player:Interactive{
     
     var maxStamina: CGFloat = 100
     var stamina: CGFloat
-    var projectedStaminaLoss : CGFloat = 0.0
     
     
     convenience init() {
@@ -59,25 +58,42 @@ class Player:Interactive{
         fatalError("init(coder:) has not been implemented")
     }
     
+    private static func magnitudeAndDirection(startPoint:CGPoint, endPoint:CGPoint) -> (CGFloat,(CGFloat,CGFloat)){
+        let dx = startPoint.x - endPoint.x
+        let dy = startPoint.y - endPoint.y
+        let mag = pow(pow(dx, 2.0) + pow(dy, 2.0),0.5)
+        let maxPullDistance = CGFloat(50.0) //made this up
+        let cappedMag = mag <= maxPullDistance ? mag : maxPullDistance
+        
+        return (cappedMag, (dx/mag,dy/mag))
+    }
+    
+    static func projectedStamina(startPoint:CGPoint, endPoint:CGPoint)->CGFloat {
+        let staminaScalingFactor : CGFloat = 0.5
+        let (distance, _) = Player.magnitudeAndDirection(startPoint: startPoint, endPoint: endPoint)
+        return distance * staminaScalingFactor
+    }
     
     
     func launchBall(startPoint:CGPoint, endPoint:CGPoint){
         // TODO: launchBall
-        let dx = startPoint.x - endPoint.x
-        let dy = startPoint.y - endPoint.y
-        let mag = pow(pow(dx, 2.0) + pow(dy, 2.0),0.5)
-        let minVel = CGFloat(20.0) //made this up
-        let maxVel = CGFloat(50.0) //made this up
-        let scalingFactor = CGFloat(0.5) //made this up
-        let uncappedNewMag = scalingFactor*mag + minVel
-        let newVelMag = uncappedNewMag <= maxVel ? uncappedNewMag : maxVel
         
-        let newDX = dx/mag * newVelMag
-        let newDY = dx/mag * newVelMag
+        let projectedStamina = Player.projectedStamina(startPoint: startPoint, endPoint: endPoint)
         
-        let charge = CGVector(dx: newDX, dy: newDY)
+        if (projectedStamina <= stamina) {
+            let (magnitude, (dx,dy)) = Player.magnitudeAndDirection(startPoint: startPoint, endPoint: endPoint)
+            let velocityScalingFactor = CGFloat(2.0) //made this up
+            
+            let newDX = dx*magnitude * velocityScalingFactor
+            let newDY = dy*magnitude * velocityScalingFactor
+            
+            let charge = CGVector(dx: newDX, dy: newDY)
+            self.physicsBody?.applyImpulse(charge)
+            self.stamina -= projectedStamina
+        } else {
+            debugPrint("DEBUG: We should never be in this situation")
+        }
         
-        self.physicsBody?.applyImpulse(charge)
     }
     
     
