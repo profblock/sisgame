@@ -29,6 +29,7 @@ class Wall: SKShapeNode {
         self.physicsBody?.isDynamic = false
         self.physicsBody?.friction = 1.0
         self.strokeColor = UIColor.red
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -30,6 +30,7 @@
 		96F8A91E2228A44B009DEE0F /* StaminaBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A91D2228A44B009DEE0F /* StaminaBar.swift */; };
 		96F8A9202228A4CD009DEE0F /* DeathWallEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A91F2228A4CD009DEE0F /* DeathWallEffects.swift */; };
 		96F8A9222228A663009DEE0F /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A9212228A663009DEE0F /* Camera.swift */; };
+		96FC26F3224AC84B00F41A5B /* Launcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FC26F2224AC84B00F41A5B /* Launcher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		96F8A91D2228A44B009DEE0F /* StaminaBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaminaBar.swift; sourceTree = "<group>"; };
 		96F8A91F2228A4CD009DEE0F /* DeathWallEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeathWallEffects.swift; sourceTree = "<group>"; };
 		96F8A9212228A663009DEE0F /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		96FC26F2224AC84B00F41A5B /* Launcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Launcher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 				96F8A91D2228A44B009DEE0F /* StaminaBar.swift */,
 				96F8A91F2228A4CD009DEE0F /* DeathWallEffects.swift */,
 				96F8A9212228A663009DEE0F /* Camera.swift */,
+				96FC26F2224AC84B00F41A5B /* Launcher.swift */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -205,6 +208,7 @@
 				96F8A91E2228A44B009DEE0F /* StaminaBar.swift in Sources */,
 				8720E2F5220E1F1900B20EA0 /* SampleScene.swift in Sources */,
 				96F8A91A2228A2C2009DEE0F /* Coin.swift in Sources */,
+				96FC26F3224AC84B00F41A5B /* Launcher.swift in Sources */,
 				96F8A905222895F5009DEE0F /* Wall.swift in Sources */,
 				96F8A916222896DA009DEE0F /* Parallax.swift in Sources */,
 				96F8A90D22289651009DEE0F /* Enemy.swift in Sources */,

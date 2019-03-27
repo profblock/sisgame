@@ -13,11 +13,43 @@ import SpriteKit
 class Camera: SKCameraNode{
     
     var previousPosition: CGPoint!
+    var leftScreen: SKShapeNode!
+    var rightScreen: SKShapeNode!
+    var pauseButton: SKShapeNode!
     
     override init() {
         super.init()
         self.setScale(1.1) // This is mostly for observing the state of the world as we work on things
         previousPosition = self.position
+        
+        leftScreen = SKShapeNode()
+        rightScreen = SKShapeNode()
+        pauseButton = SKShapeNode()
+    }
+    
+    func initHelper(){
+        // We need the camera to be added to the game scene before we can calculate the size
+        // of the screen regions, so we call this helper after the camera is added to the scene
+        let screenRegionXBound = self.scene!.view!.bounds.maxX
+        let screenRegionYBound = self.scene!.view!.bounds.maxY
+        leftScreen = SKShapeNode(rect: CGRect(x: 0, y: 0, width: (screenRegionXBound/2)-1, height: screenRegionYBound))
+        leftScreen.fillColor = .clear
+        leftScreen.lineWidth = 0
+        leftScreen.position = CGPoint(x: -screenRegionXBound/2, y: -(screenRegionYBound/2))
+        self.addChild(leftScreen)
+        
+        rightScreen = SKShapeNode(rect: CGRect(x: 0, y: 0, width: (screenRegionXBound/2)-1, height: screenRegionYBound))
+        rightScreen.fillColor = .clear
+        rightScreen.lineWidth = 1
+        rightScreen.strokeColor = .purple
+        rightScreen.position = CGPoint(x: 1, y: -(screenRegionYBound/2))
+        self.addChild(rightScreen)
+        
+        pauseButton = SKShapeNode(rect: CGRect(x: 0, y: 0, width: 30, height: 30))
+        pauseButton.fillColor = .purple
+        pauseButton.lineWidth = 0
+        pauseButton.position = CGPoint(x: -(screenRegionXBound/2) + 20, y: (screenRegionYBound/2) - 40)
+        self.addChild(pauseButton)
     }
     
     required init?(coder aDecoder: NSCoder) {

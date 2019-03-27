@@ -15,13 +15,15 @@ class Player:Interactive{
     // TODO: Stamina
     
     
-    var stamina: Int! // Not implemented
+    var stamina: CGFloat!
+    var maxStamina: CGFloat = 100
     
     convenience init() {
         // convenience constructer
         
         let texture = SKTexture(imageNamed: "sface.png")
         self.init(texture: texture, color: .white, size: CGSize(width: 40, height: 40))
+        self.stamina = 100.0
         
         
     }
@@ -53,9 +55,23 @@ class Player:Interactive{
     
     
     
-    func launchBall(){
+    func launchBall(startPoint:CGPoint, endPoint:CGPoint){
         // TODO: launchBall
+        let dx = startPoint.x - endPoint.x
+        let dy = startPoint.y - endPoint.y
+        let mag = pow(pow(dx, 2.0) + pow(dy, 2.0),0.5)
+        let minVel = CGFloat(20.0) //made this up
+        let maxVel = CGFloat(50.0) //made this up
+        let scalingFactor = CGFloat(0.5) //made this up
+        let uncappedNewMag = scalingFactor*mag + minVel
+        let newVelMag = uncappedNewMag <= maxVel ? uncappedNewMag : maxVel
         
+        let newDX = dx/mag * newVelMag
+        let newDY = dx/mag * newVelMag
+        
+        let charge = CGVector(dx: newDX, dy: newDY)
+        
+        self.physicsBody?.applyImpulse(charge)
     }
     
     

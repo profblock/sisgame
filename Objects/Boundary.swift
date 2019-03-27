@@ -11,7 +11,7 @@ import SpriteKit
 
 
 class Boundary: SKShapeNode{
-    // TODO:
+    // TODO: Generate next segment of floor and ceiling
     
     var segmentCount = 0;
     let lengthOfSpline = 500;
