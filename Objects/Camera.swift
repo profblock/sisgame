@@ -16,6 +16,7 @@ class Camera: SKCameraNode{
     var leftScreen: SKShapeNode!
     var rightScreen: SKShapeNode!
     var pauseButton: SKShapeNode!
+    var scoreLabel: SKLabelNode!
     
     override init() {
         super.init()
@@ -25,6 +26,7 @@ class Camera: SKCameraNode{
         leftScreen = SKShapeNode()
         rightScreen = SKShapeNode()
         pauseButton = SKShapeNode()
+        scoreLabel = SKLabelNode()
     }
     
     func initHelper(){
@@ -50,6 +52,13 @@ class Camera: SKCameraNode{
         pauseButton.lineWidth = 0
         pauseButton.position = CGPoint(x: -(screenRegionXBound/2) + 20, y: (screenRegionYBound/2) - 40)
         self.addChild(pauseButton)
+        
+        scoreLabel = SKLabelNode(text: " - Score")
+        scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.right
+        scoreLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.bottom
+        // TODO: Change y offset to +5 for release; at +20 for debug text
+        scoreLabel.position = CGPoint(x: (screenRegionXBound/2), y: -(screenRegionYBound/2) + 20)
+        self.addChild(scoreLabel)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -87,6 +96,12 @@ class Camera: SKCameraNode{
     func zoomIn(){
         
         
+    }
+    
+    func updateScore(score: CGFloat) {
+        // Removes the decimal from final score
+        let simpleScore: Int = Int(score)
+        scoreLabel.text = "\(simpleScore) - Score"
     }
     
     

@@ -37,6 +37,8 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
     private var launcher : Launcher?
     private var isLauncherOnScreen = false
     private var staminaBar: StaminaBar!
+    private var score: CGFloat?
+    let scoreScalingFactor: CGFloat = 0.01
     
     //Change to false enable death wall
     let debug : Bool = true
@@ -45,7 +47,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
         
         physicsWorld.contactDelegate = self
-        
+        score = 0
         staminaBar = StaminaBar(stamina: ball.stamina)
         
 
@@ -71,6 +73,8 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
     
     override func didFinishUpdate() {
         self.deathWall!.moveWall()
+        // Updating score label in UI
+        self.myCamera.updateScore(score: score!)
     }
     
     
@@ -179,6 +183,9 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
             launcher?.repaint(stamina: ball.stamina)
         }
         staminaBar.changeStamina(newStamina: ball.stamina)
+        
+        // Updating score value, based on distance travelled and scaling factor
+        score = CGFloat(ball.calculateDistanceTravelled() * scoreScalingFactor).rounded()
     }
     
     

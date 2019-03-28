@@ -17,13 +17,12 @@ class Player:Interactive{
     
     var maxStamina: CGFloat = 100
     var stamina: CGFloat
-    
+    var distanceTravelled: CGFloat = 0
     
     convenience init() {
         // convenience constructer
         let texture = SKTexture(imageNamed: "sface.png")
         self.init(texture: texture, color: .white, size: CGSize(width: 40, height: 40))
-
     }
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
@@ -94,6 +93,17 @@ class Player:Interactive{
             debugPrint("DEBUG: We should never be in this situation")
         }
         
+    }
+    
+    func calculateDistanceTravelled() -> CGFloat {
+        
+        // Makes sure that distanceTravelled
+        // never goes backwards
+        if(position.x > distanceTravelled) {
+            distanceTravelled = position.x
+        }
+        
+        return distanceTravelled
     }
     
     
