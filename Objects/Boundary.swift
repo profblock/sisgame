@@ -16,10 +16,13 @@ class Boundary: SKShapeNode{
     var segmentCount = 0;
     let lengthOfSpline = 100; //Changed to smaller value for testing
     var prevFinalPoint: CGPoint?
+    let arrayMaxSize: Int = 6
+    var splineTracker: [SKShapeNode]?
     
     
     override init(){
         super.init()
+        splineTracker = []
         addSegment()
         
     }
@@ -29,6 +32,16 @@ class Boundary: SKShapeNode{
     }
     
     func addSegment() {
+        // Removes old splines from scene and memory
+        // if we reach 3 splines on-screen
+        if splineTracker?.count == arrayMaxSize {
+            for i in 0...1 {
+                splineTracker![i].removeFromParent()
+                splineTracker?.remove(at: i)
+            }
+        }
+        
+        
         // firstRunDone is just to show that it is changing and making new ones
         var firstRunDone: Bool = false
         var baseCornerPoint = CGPoint(x: 0, y: 0)
@@ -70,7 +83,9 @@ class Boundary: SKShapeNode{
         
         self.addChild(ceiling)
         self.addChild(floor)
-        
+        splineTracker?.append(ceiling)
+        splineTracker?.append(floor)
+
         
     }
     
@@ -79,23 +94,37 @@ class Boundary: SKShapeNode{
         let horizMax = 100
         let vertMin = -2
         let vertMax = 50
+        let connectDistance: CGFloat = 200 // Even looks good at 100
         
         var splinePoints = [CGPoint]()
         splinePoints.append(startPoint)
         
-        var lastPoint = startPoint
-        for i in 0 ..< numberOfPoints {
+        let secondPoint = CGPoint(x: startPoint.x + connectDistance, y: startPoint.y)
+        splinePoints.append(secondPoint)
+        
+        var lastPoint = secondPoint
+        for i in 1 ..< numberOfPoints - 1 {
             let horizDelta = CGFloat(Int.random(in: horizMin ..< horizMax))
             let vertDelta = CGFloat(Int.random(in: vertMin ..< vertMax))
-            lastPoint = CGPoint(x: lastPoint.x + horizDelta, y: lastPoint.y + vertDelta)
+            if(i == numberOfPoints - 2) {
+                lastPoint = CGPoint(x: lastPoint.x + connectDistance, y: lastPoint.y)
+            } else {
+                lastPoint = CGPoint(x: lastPoint.x + horizDelta, y: lastPoint.y + vertDelta)
+            }
             splinePoints.append(lastPoint)
             
             //This is to compensate for the fact that the last spline point isn't drawn. It's
             //just a control point
-            if(i == numberOfPoints - 2) {
-                prevFinalPoint = lastPoint
-            }
+//            if(i == numberOfPoints - 2) {
+//                prevFinalPoint = lastPoint
+//            }
         }
+        
+        prevFinalPoint = lastPoint
+        let actualLastPoint = CGPoint(x: lastPoint.x + connectDistance, y: lastPoint.y)
+        splinePoints.append(actualLastPoint)
+        
+        
         
         return splinePoints
     }
@@ -105,14 +134,20 @@ class Boundary: SKShapeNode{
         let horizMax = 20
         let vertMin = 400
         let vertMax = 500
+        let connectDistance: CGFloat = 200
         
         var splinePoints = [CGPoint]()
         
+        // Somewhere around here is where the current gap issue with the ceiling can be found...
+        // floor connects great, not sure why the ceiling is having such a fit -Zach
         let firstPoint = CGPoint(x: floorPoints.first!.x,
-                                 y: floorPoints.first!.y + CGFloat(Int.random(in: vertMin ..< vertMax)))
+                                 y: floorPoints.first!.y + CGFloat(vertMax))
         splinePoints.append(firstPoint)
         
-        var count = 1
+        let secondPoint = CGPoint(x: firstPoint.x + connectDistance, y: firstPoint.y)
+        splinePoints.append(secondPoint)
+        
+        var count = 2
         while count < floorPoints.count-1{
             let point = CGPoint(x: floorPoints[count].x + CGFloat(Int.random(in: horizMin ..< horizMax)),
                                 y: floorPoints[count].y + CGFloat(Int.random(in: vertMin ..< vertMax)))
@@ -120,9 +155,12 @@ class Boundary: SKShapeNode{
             count+=1
         }
         
-        let lastPoint = CGPoint(x: floorPoints.last!.x,
-                                y: floorPoints.last!.y + CGFloat(Int.random(in: vertMin ..< vertMax)))
+        let lastPoint = CGPoint(x: prevFinalPoint!.x + connectDistance,
+                                y: prevFinalPoint!.y + CGFloat(vertMax))
         splinePoints.append(lastPoint)
+        
+        let actualLastPoint = CGPoint(x: lastPoint.x + connectDistance, y: lastPoint.y)
+        splinePoints.append(actualLastPoint)
         
         return splinePoints
     }
