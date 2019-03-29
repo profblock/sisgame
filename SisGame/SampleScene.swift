@@ -39,6 +39,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
     private var staminaBar: StaminaBar!
     private var score: CGFloat?
     let scoreScalingFactor: CGFloat = 0.01
+    private var ground: Boundary?
     
     //Change to false enable death wall
     let debug : Bool = true
@@ -51,7 +52,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         staminaBar = StaminaBar(stamina: ball.stamina)
         
 
-        let ground = Boundary()
+        ground = Boundary()
         deathWall = Wall(startX: -300.0, color: .red, doesKill: true)
         safeWall = Wall(startX: 0.0, color: .blue, doesKill: false)
         
@@ -59,7 +60,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(self.ball)
         self.addChild(self.deathWall!)
         self.addChild(self.safeWall!)
-        self.addChild(ground)
+        self.addChild(ground!)
         
         myCamera = Camera()
         self.camera = myCamera
@@ -75,6 +76,11 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         self.deathWall!.moveWall()
         // Updating score label in UI
         self.myCamera.updateScore(score: score!)
+        
+        // TODO: Change from 300 to double of the width of the screen
+        if(ball.position.x >= ground!.prevFinalPoint!.x - 300) {
+            ground?.addSegment()
+        }
     }
     
     
