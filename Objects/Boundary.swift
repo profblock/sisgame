@@ -14,7 +14,7 @@ class Boundary: SKShapeNode{
     // TODO: Generate next segment of floor and ceiling
     
     var segmentCount = 0;
-    let lengthOfSpline = 500;
+    let lengthOfSpline = 100; //Changed to smaller value for testing
     var prevFinalPoint: CGPoint?
     
     
@@ -36,7 +36,12 @@ class Boundary: SKShapeNode{
             baseCornerPoint = prevFinalPoint!
             firstRunDone = true
         }
+        print("Prev:\(prevFinalPoint)")
         var floorSplinePoints = createFloorSpline(startPoint: baseCornerPoint, numberOfPoints: lengthOfSpline)
+        print("THE SEGEMENT FIRST POINT \(floorSplinePoints.first!)")
+        print("THE SEGEMENT last POINT \(floorSplinePoints.last!)")
+        
+        
         let floor = SKShapeNode(splinePoints: &floorSplinePoints, count: lengthOfSpline)
         floor.lineWidth = 5
         floor.physicsBody = SKPhysicsBody(edgeChainFrom: floor.path!)
@@ -79,13 +84,18 @@ class Boundary: SKShapeNode{
         splinePoints.append(startPoint)
         
         var lastPoint = startPoint
-        for _ in 0 ..< numberOfPoints {
+        for i in 0 ..< numberOfPoints {
             let horizDelta = CGFloat(Int.random(in: horizMin ..< horizMax))
             let vertDelta = CGFloat(Int.random(in: vertMin ..< vertMax))
             lastPoint = CGPoint(x: lastPoint.x + horizDelta, y: lastPoint.y + vertDelta)
             splinePoints.append(lastPoint)
+            
+            //This is to compensate for the fact that the last spline point isn't drawn. It's
+            //just a control point
+            if(i == numberOfPoints - 2) {
+                prevFinalPoint = lastPoint
+            }
         }
-        prevFinalPoint = lastPoint
         
         return splinePoints
     }

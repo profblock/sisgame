@@ -67,6 +67,7 @@ class Player:Interactive{
         return (cappedMag, (dx/mag,dy/mag))
     }
     
+
     static func projectedStamina(startPoint:CGPoint, endPoint:CGPoint)->CGFloat {
         let staminaScalingFactor : CGFloat = 0.5
         let (distance, _) = Player.magnitudeAndDirection(startPoint: startPoint, endPoint: endPoint)
