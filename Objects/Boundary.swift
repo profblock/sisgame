@@ -121,9 +121,10 @@ class Boundary: SKShapeNode{
         }
         
         prevFinalPoint = lastPoint
+        print("Last point floor\(lastPoint)")
         let actualLastPoint = CGPoint(x: lastPoint.x + connectDistance, y: lastPoint.y)
         splinePoints.append(actualLastPoint)
-        
+        print("actula Last point floor\(actualLastPoint)")
         
         
         return splinePoints
@@ -134,7 +135,6 @@ class Boundary: SKShapeNode{
         let horizMax = 20
         let vertMin = 400
         let vertMax = 500
-        let connectDistance: CGFloat = 200
         
         var splinePoints = [CGPoint]()
         
@@ -144,23 +144,25 @@ class Boundary: SKShapeNode{
                                  y: floorPoints.first!.y + CGFloat(vertMax))
         splinePoints.append(firstPoint)
         
-        let secondPoint = CGPoint(x: firstPoint.x + connectDistance, y: firstPoint.y)
+        let secondPoint = CGPoint(x: floorPoints[1].x, y: firstPoint.y)
         splinePoints.append(secondPoint)
         
         var count = 2
-        while count < floorPoints.count-1{
+        while count < floorPoints.count-2{
             let point = CGPoint(x: floorPoints[count].x + CGFloat(Int.random(in: horizMin ..< horizMax)),
                                 y: floorPoints[count].y + CGFloat(Int.random(in: vertMin ..< vertMax)))
             splinePoints.append(point)
             count+=1
         }
         
-        let lastPoint = CGPoint(x: prevFinalPoint!.x + connectDistance,
-                                y: prevFinalPoint!.y + CGFloat(vertMax))
+        let lastPoint = CGPoint(x: floorPoints[floorPoints.count-2].x,
+                                y: floorPoints[floorPoints.count-2].y + CGFloat(vertMax))
         splinePoints.append(lastPoint)
+        print("Last point Ceil\(lastPoint)")
         
-        let actualLastPoint = CGPoint(x: lastPoint.x + connectDistance, y: lastPoint.y)
+        let actualLastPoint = CGPoint(x: floorPoints[floorPoints.count-1].x, y: lastPoint.y)
         splinePoints.append(actualLastPoint)
+        print("Actual Last point Ceil\(actualLastPoint)")
         
         return splinePoints
     }
