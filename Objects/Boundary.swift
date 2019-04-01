@@ -40,14 +40,10 @@ class Boundary: SKShapeNode{
                 splineTracker?.remove(at: i)
             }
         }
-        
-        
-        // firstRunDone is just to show that it is changing and making new ones
-        var firstRunDone: Bool = false
+
         var baseCornerPoint = CGPoint(x: 0, y: 0)
         if(prevFinalPoint != nil) {
             baseCornerPoint = prevFinalPoint!
-            firstRunDone = true
         }
         var floorSplinePoints = createFloorSpline(startPoint: baseCornerPoint, numberOfPoints: lengthOfSpline)
         
@@ -59,12 +55,7 @@ class Boundary: SKShapeNode{
         floor.physicsBody?.isDynamic = false
         floor.physicsBody?.friction = 1.0
         floor.physicsBody?.categoryBitMask = PhysicsCategory.Ground
-        if(firstRunDone) {
-            floor.strokeColor = .red
-        }
         
-        
-//        var ceilingSplinePoints = createCeilingSpline(startPoint: baseCornerPoint, numberOfPoints: lengthOfSpline)
         var ceilingSplinePoints = createCeilingSpline(floorPoints: floorSplinePoints)
         let ceiling = SKShapeNode(splinePoints: &ceilingSplinePoints, count: lengthOfSpline)
         ceiling.lineWidth = 5
@@ -73,9 +64,6 @@ class Boundary: SKShapeNode{
         ceiling.physicsBody?.isDynamic = false
         ceiling.physicsBody?.friction = 1.0
         ceiling.physicsBody?.categoryBitMask = PhysicsCategory.Ground
-        if(firstRunDone) {
-            ceiling.strokeColor = .red
-        }
         
         
         self.addChild(ceiling)
