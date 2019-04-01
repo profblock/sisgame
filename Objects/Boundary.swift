@@ -49,10 +49,7 @@ class Boundary: SKShapeNode{
             baseCornerPoint = prevFinalPoint!
             firstRunDone = true
         }
-        print("Prev:\(prevFinalPoint)")
         var floorSplinePoints = createFloorSpline(startPoint: baseCornerPoint, numberOfPoints: lengthOfSpline)
-        print("THE SEGEMENT FIRST POINT \(floorSplinePoints.first!)")
-        print("THE SEGEMENT last POINT \(floorSplinePoints.last!)")
         
         
         let floor = SKShapeNode(splinePoints: &floorSplinePoints, count: lengthOfSpline)
@@ -121,10 +118,9 @@ class Boundary: SKShapeNode{
         }
         
         prevFinalPoint = lastPoint
-        print("Last point floor\(lastPoint)")
         let actualLastPoint = CGPoint(x: lastPoint.x + connectDistance, y: lastPoint.y)
         splinePoints.append(actualLastPoint)
-        print("actula Last point floor\(actualLastPoint)")
+
         
         
         return splinePoints
@@ -158,11 +154,9 @@ class Boundary: SKShapeNode{
         let lastPoint = CGPoint(x: floorPoints[floorPoints.count-2].x,
                                 y: floorPoints[floorPoints.count-2].y + CGFloat(vertMax))
         splinePoints.append(lastPoint)
-        print("Last point Ceil\(lastPoint)")
         
         let actualLastPoint = CGPoint(x: floorPoints[floorPoints.count-1].x, y: lastPoint.y)
         splinePoints.append(actualLastPoint)
-        print("Actual Last point Ceil\(actualLastPoint)")
         
         return splinePoints
     }

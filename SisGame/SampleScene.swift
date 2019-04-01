@@ -86,12 +86,11 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first{
-            print("Touches started")
             startPoint = touch.location(in: self.myCamera)
-            print(myCamera.leftScreen.contains(touch.location(in: self.myCamera)))
+            
 
             if(myCamera.pauseButton.contains(touch.location(in: self.myCamera))){
-                print("Pause")
+
                 if(self.isPaused == false){
                     self.isPaused = true
                 } else{
@@ -122,9 +121,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first{
-            print("Touches moved")
             if(myCamera.leftScreen.contains(self.startPoint!) && isLauncherOnScreen == true){
-                print("x:\(touch.location(in: self.view).x),y:\(touch.location(in: self.view).y) ")
                 launcher?.repaint(curTap: touch.location(in: self.myCamera), stamina: ball.stamina)
                 //ball.stamina = ball.stamina - 1
                 if(ball.stamina < CGFloat(0)) {
@@ -146,7 +143,6 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         
         if let touch = touches.first, let startPoint = self.startPoint{
             if(myCamera.pauseButton.contains(touch.location(in: self.myCamera))){
-                print("Pause")
             } else if(myCamera.leftScreen.contains(touch.location(in: self.myCamera))){
                 //physicsWorld.speed = 1
                 if(myCamera.leftScreen.contains(self.startPoint!) && isLauncherOnScreen){
@@ -213,11 +209,9 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         // 2
         if ((firstBody.categoryBitMask & PhysicsCategory.Ball != 0) &&
             (secondBody.categoryBitMask & PhysicsCategory.Coin != 0)) {
-            print("Contact")
             // _ here is the ball, but we never reference it
             if let _ = firstBody.node as? SKShapeNode, let
                 coin = secondBody.node as? SKShapeNode {
-                //                print("A collision between the ball and coin")
                 coin.removeFromParent()
                 return // No need for more collision checks if we accomplished our goal
                 
@@ -227,7 +221,6 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         
         if ((firstBody.categoryBitMask & PhysicsCategory.Ball != 0) &&
             (secondBody.categoryBitMask & PhysicsCategory.Wall != 0)) {
-            //            print("Ball hit wall")
             if(debug == false) {
                 let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
                 let gameOverScene = GameOverScene(size: self.size, won: false)
