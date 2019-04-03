@@ -17,6 +17,7 @@ struct PhysicsCategory {
     static let Coin: UInt32 = 0b100      // 4
     static let Wall: UInt32 = 0b1000      // 8
     static let Field: UInt32 = 0b10000      // 16
+    static let Brick: UInt32 = 0b100000      // 32
 }
 
 //SKScenes are the "view" equivalant for sprite kit.

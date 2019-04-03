@@ -20,7 +20,7 @@ class CoinBrick: Contactable{
         
         //Dimensions for texture
         let color = UIColor.clear
-        let size = CGSize(width: 40.0,height: 40.0)
+        let size = CGSize(width: 400.0,height: 400.0)
         
         let texture:SKTexture
         if isCoin {
@@ -30,21 +30,34 @@ class CoinBrick: Contactable{
         }
         
         super.init(texture: texture, color: color, size: size)
+        if isCoin {
+            self.physicsBody?.categoryBitMask = PhysicsCategory.Coin
+            self.physicsBody?.collisionBitMask = PhysicsCategory.None
+            self.physicsBody?.contactTestBitMask = PhysicsCategory.Ball
+        } else {
+            self.physicsBody?.categoryBitMask = PhysicsCategory.Brick
+            self.physicsBody?.collisionBitMask = PhysicsCategory.Ball
+            self.physicsBody?.contactTestBitMask = PhysicsCategory.None
+        }
         self.position = position
-        
-        self.physicsBody?.contactTestBitMask = PhysicsCategory.Ball
-        self.physicsBody?.categoryBitMask = PhysicsCategory.Coin
-        self.physicsBody?.collisionBitMask = PhysicsCategory.None
     }
     
+    
     override func toggle() {
+        isCoin.toggle()
         if isCoin {
-            self.texture = SKTexture(imageNamed: "Brick")
-        } else {
             self.texture = SKTexture(imageNamed: "Coin")
+            self.physicsBody?.categoryBitMask = PhysicsCategory.Coin
+            self.physicsBody?.collisionBitMask = PhysicsCategory.None
+            self.physicsBody?.contactTestBitMask = PhysicsCategory.Ball
+        } else {
+            self.texture = SKTexture(imageNamed: "Brick")
+            self.physicsBody?.categoryBitMask = PhysicsCategory.Brick
+            self.physicsBody?.collisionBitMask = PhysicsCategory.Ball
+            self.physicsBody?.contactTestBitMask = PhysicsCategory.None
         }
         
-        isCoin.toggle()
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
