@@ -32,6 +32,7 @@
 		96F8A9222228A663009DEE0F /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A9212228A663009DEE0F /* Camera.swift */; };
 		96FC26F3224AC84B00F41A5B /* Launcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FC26F2224AC84B00F41A5B /* Launcher.swift */; };
 		BA65078A224BDAEC00520B6D /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA650789224BDAEC00520B6D /* GameOverScene.swift */; };
+		BA7E5ED8225515BC004CD18E /* ParallaxBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7E5ED7225515BC004CD18E /* ParallaxBackground.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		96F8A9212228A663009DEE0F /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		96FC26F2224AC84B00F41A5B /* Launcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Launcher.swift; sourceTree = "<group>"; };
 		BA650789224BDAEC00520B6D /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
+		BA7E5ED7225515BC004CD18E /* ParallaxBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxBackground.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 		96F8A91822289805009DEE0F /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				BA7E5ED7225515BC004CD18E /* ParallaxBackground.swift */,
 				BA650789224BDAEC00520B6D /* GameOverScene.swift */,
 				96F8A8FE22289562009DEE0F /* Interactive.swift */,
 				96F8A900222895AD009DEE0F /* Noninteractive.swift */,
@@ -223,6 +226,7 @@
 				96F8A907222895FF009DEE0F /* Boundary.swift in Sources */,
 				BA65078A224BDAEC00520B6D /* GameOverScene.swift in Sources */,
 				96F8A8FF22289562009DEE0F /* Interactive.swift in Sources */,
+				BA7E5ED8225515BC004CD18E /* ParallaxBackground.swift in Sources */,
 				96F8A90922289618009DEE0F /* Player.swift in Sources */,
 				96F8A90B2228963D009DEE0F /* Contactable.swift in Sources */,
 				8720E2DD220E1D9400B20EA0 /* AppDelegate.swift in Sources */,
@@ -390,7 +394,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "XKTC4NP24M";
+				DEVELOPMENT_TEAM = XKTC4NP24M;
 				INFOPLIST_FILE = SisGame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
