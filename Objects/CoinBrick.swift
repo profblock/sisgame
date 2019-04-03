@@ -1,5 +1,5 @@
 //
-//  Coin.swift
+//  CoinBrick.swift
 //  SisGame
 //
 //  Created by Anthoni on 2/28/19.
@@ -10,11 +10,13 @@ import Foundation
 import SpriteKit
 
 
-class Coin: Contactable{
+class CoinBrick: Contactable{
+    
+    var isCoin: Bool
     
     
-    
-    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+    init(texture: SKTexture?, color: UIColor, size: CGSize, isCoin:Bool) {
+        self.isCoin = isCoin
         
         super.init(texture: texture, color: color, size: size)
         
