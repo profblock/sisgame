@@ -20,9 +20,9 @@ class CoinBrick: Contactable{
         
         let texture:SKTexture
         if isCoin {
-            texture = SKTexture(imageNamed: "coin")
+            texture = SKTexture(imageNamed: "Coin")
         } else {
-            texture = SKTexture(imageNamed: "brick")
+            texture = SKTexture(imageNamed: "Brick")
         }
         
         super.init(texture: texture, color: color, size: size)
