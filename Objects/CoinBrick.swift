@@ -18,6 +18,13 @@ class CoinBrick: Contactable{
     init(texture: SKTexture?, color: UIColor, size: CGSize, isCoin:Bool) {
         self.isCoin = isCoin
         
+        let texture:SKTexture
+        if isCoin {
+            texture = SKTexture(imageNamed: "coin")
+        } else {
+            texture = SKTexture(imageNamed: "brick")
+        }
+        
         super.init(texture: texture, color: color, size: size)
         
         self.physicsBody?.contactTestBitMask = PhysicsCategory.Ball
