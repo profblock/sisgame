@@ -26,7 +26,6 @@
 		96F8A9122228969D009DEE0F /* Spikes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A9112228969D009DEE0F /* Spikes.swift */; };
 		96F8A916222896DA009DEE0F /* Parallax.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A915222896DA009DEE0F /* Parallax.swift */; };
 		96F8A91A2228A2C2009DEE0F /* CoinBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A9192228A2C2009DEE0F /* CoinBrick.swift */; };
-		96F8A91C2228A2E3009DEE0F /* Brick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A91B2228A2E3009DEE0F /* Brick.swift */; };
 		96F8A91E2228A44B009DEE0F /* StaminaBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A91D2228A44B009DEE0F /* StaminaBar.swift */; };
 		96F8A9202228A4CD009DEE0F /* DeathWallEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A91F2228A4CD009DEE0F /* DeathWallEffects.swift */; };
 		96F8A9222228A663009DEE0F /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A9212228A663009DEE0F /* Camera.swift */; };
@@ -56,7 +55,6 @@
 		96F8A9112228969D009DEE0F /* Spikes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spikes.swift; sourceTree = "<group>"; };
 		96F8A915222896DA009DEE0F /* Parallax.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parallax.swift; sourceTree = "<group>"; };
 		96F8A9192228A2C2009DEE0F /* CoinBrick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinBrick.swift; sourceTree = "<group>"; };
-		96F8A91B2228A2E3009DEE0F /* Brick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brick.swift; sourceTree = "<group>"; };
 		96F8A91D2228A44B009DEE0F /* StaminaBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaminaBar.swift; sourceTree = "<group>"; };
 		96F8A91F2228A4CD009DEE0F /* DeathWallEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeathWallEffects.swift; sourceTree = "<group>"; };
 		96F8A9212228A663009DEE0F /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
@@ -123,7 +121,6 @@
 				96F8A9112228969D009DEE0F /* Spikes.swift */,
 				96F8A915222896DA009DEE0F /* Parallax.swift */,
 				96F8A9192228A2C2009DEE0F /* CoinBrick.swift */,
-				96F8A91B2228A2E3009DEE0F /* Brick.swift */,
 				96F8A91D2228A44B009DEE0F /* StaminaBar.swift */,
 				96F8A91F2228A4CD009DEE0F /* DeathWallEffects.swift */,
 				96F8A9212228A663009DEE0F /* Camera.swift */,
@@ -207,7 +204,6 @@
 			files = (
 				96F8A903222895EB009DEE0F /* World.swift in Sources */,
 				96F8A9202228A4CD009DEE0F /* DeathWallEffects.swift in Sources */,
-				96F8A91C2228A2E3009DEE0F /* Brick.swift in Sources */,
 				96F8A90F22289659009DEE0F /* Well.swift in Sources */,
 				96F8A91E2228A44B009DEE0F /* StaminaBar.swift in Sources */,
 				8720E2F5220E1F1900B20EA0 /* SampleScene.swift in Sources */,
