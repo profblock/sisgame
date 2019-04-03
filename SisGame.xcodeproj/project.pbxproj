@@ -32,6 +32,8 @@
 		96FC26F3224AC84B00F41A5B /* Launcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FC26F2224AC84B00F41A5B /* Launcher.swift */; };
 		BA65078A224BDAEC00520B6D /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA650789224BDAEC00520B6D /* GameOverScene.swift */; };
 		BA7E5ED8225515BC004CD18E /* ParallaxBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7E5ED7225515BC004CD18E /* ParallaxBackground.swift */; };
+		BAF8AE2922551ED50099D905 /* Parallax-Diamonds-1.mov in Resources */ = {isa = PBXBuildFile; fileRef = BAF8AE2722551ED50099D905 /* Parallax-Diamonds-1.mov */; };
+		BAF8AE2A22551ED50099D905 /* Parallax-Diamonds-2.mov in Resources */ = {isa = PBXBuildFile; fileRef = BAF8AE2822551ED50099D905 /* Parallax-Diamonds-2.mov */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +64,8 @@
 		96FC26F2224AC84B00F41A5B /* Launcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Launcher.swift; sourceTree = "<group>"; };
 		BA650789224BDAEC00520B6D /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		BA7E5ED7225515BC004CD18E /* ParallaxBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxBackground.swift; sourceTree = "<group>"; };
+		BAF8AE2722551ED50099D905 /* Parallax-Diamonds-1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "Parallax-Diamonds-1.mov"; sourceTree = "<group>"; };
+		BAF8AE2822551ED50099D905 /* Parallax-Diamonds-2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "Parallax-Diamonds-2.mov"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +82,8 @@
 		8720E2D0220E1D9400B20EA0 = {
 			isa = PBXGroup;
 			children = (
+				BAF8AE2722551ED50099D905 /* Parallax-Diamonds-1.mov */,
+				BAF8AE2822551ED50099D905 /* Parallax-Diamonds-2.mov */,
 				96F8A91822289805009DEE0F /* Objects */,
 				8720E2DB220E1D9400B20EA0 /* SisGame */,
 				8720E2DA220E1D9400B20EA0 /* Products */,
@@ -191,6 +197,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAF8AE2922551ED50099D905 /* Parallax-Diamonds-1.mov in Resources */,
+				BAF8AE2A22551ED50099D905 /* Parallax-Diamonds-2.mov in Resources */,
 				8720E2E8220E1D9400B20EA0 /* Main.storyboard in Resources */,
 				8720E2EA220E1D9500B20EA0 /* Assets.xcassets in Resources */,
 				9603D53B222F224600682045 /* sface.png in Resources */,
@@ -372,7 +380,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = XKTC4NP24M;
+				DEVELOPMENT_TEAM = HUCZUMCVT2;
 				INFOPLIST_FILE = SisGame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

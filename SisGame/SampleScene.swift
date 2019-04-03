@@ -44,6 +44,9 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
     private let noGravity = CGVector(dx: 0, dy: 0)
     private var oldSpeed = CGVector.zero
     
+    private var par1:ParallaxBackground?
+    private var par2:ParallaxBackground?
+    
     //Change to false enable death wall
     let debug : Bool = true
     
@@ -54,6 +57,12 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         score = 0
         staminaBar = StaminaBar(stamina: ball.stamina)
         
+        par1 = ParallaxBackground(spriteName: "Parallax-Diamonds-1", gameScene: self, heightOffset: 0, zPosition: -1)
+        par2 = ParallaxBackground(spriteName: "Parallax-Diamonds-2", gameScene: self, heightOffset: 0, zPosition: -2)
+        self.addChild(par1!.sprite!)
+        self.addChild(par1!.spriteNext!)
+        self.addChild(par2!.sprite!)
+        self.addChild(par2!.spriteNext!)
 
         ground = Boundary()
         deathWall = Wall(startX: -300.0, color: .red, doesKill: true)
