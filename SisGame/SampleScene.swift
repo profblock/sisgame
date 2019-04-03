@@ -65,6 +65,13 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(self.safeWall!)
         self.addChild(ground!)
         
+        let coin = CoinBrick(position:CGPoint(x: ball.position.x+200, y: ball.position.y+200), isCoin: true)
+        let brick = CoinBrick(position:CGPoint(x: ball.position.x+200, y: ball.position.y-200),isCoin: false)
+        
+        self.addChild(coin)
+        self.addChild(brick)
+        
+        
         myCamera = Camera()
         self.camera = myCamera
         self.addChild(myCamera)
