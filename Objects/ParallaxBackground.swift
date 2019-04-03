@@ -17,71 +17,73 @@ class ParallaxBackground {
     private var offset:CGFloat?
     private var offsetNext:CGFloat?
     
+    private var effectNode:SKEffectNode!
+    
     init(spriteName: String, gameScene: SKScene, heightOffset: CGFloat, zPosition: CGFloat) {
-        
-//        guard let url = Bundle.main.url(forResource: spriteName, withExtension: "mov") else {
-//            print("Can't find example video")
-//            return
-//        }
-//
-//        // Creating our player
-//        let playerItem = AVPlayerItem(url: url)
-//        player = AVQueuePlayer(playerItem: playerItem)
-//        playerLooper = AVPlayerLooper(player: player as! AVQueuePlayer, templateItem: playerItem)
-//
-//        // Getting the size of our video
-//        let videoTrack = playerItem.asset.tracks(withMediaType: .video).first!
-//        let videoSize = videoTrack.naturalSize
-//
-//        // An orange background color to show transparency
-//        backgroundColor = .orange
-//
-//        // Adding a `SKVideoNode` to display video in our scene
-//        let videoNode = SKVideoNode(avPlayer: player)
-//        videoNode.position = CGPoint(x: frame.midX, y: frame.midY)
-//        // TODO: Comment
-//        videoNode.size = videoSize.applying(CGAffineTransform(scaleX: 1.0, y: 0.5))
-//
-//        // Let's make it transparent, using an SKEffectNode,
-//        // since a shader cannot be applied to a SKVideoNode directly
-//        let effectNode = SKEffectNode()
-//        // Loving Swift's multiline syntax here:
-//        effectNode.shader = SKShader(source: """
-//void main() {
-//  vec2 texCoords = v_tex_coord;
-//  vec2 colorCoords = vec2(texCoords.x, (1.0 + texCoords.y) * 0.5);
-//  vec2 alphaCoords = vec2(texCoords.x, texCoords.y * 0.5);
-//  vec4 color = texture2D(u_texture, colorCoords);
-//  float alpha = texture2D(u_texture, alphaCoords).r;
-//  gl_FragColor = vec4(color.rgb, alpha);
-//}
-//""")
-//        addChild(effectNode)
-//        effectNode.addChild(videoNode)
-//
-//        // Start playing your video
-//        player.play()
-        
-        
-        let stringPath = Bundle.main.path(forResource: spriteName, ofType: "mov")
-        let path = URL(fileURLWithPath:stringPath!)
-        self.sprite = SKVideoNode(url: path)
-//        self.spriteNext = spriteNext
+
+        // Initialization of video player gently borrowed from here: https://github.com/quentinfasquel/playgrounds/blob/master/TransparentVideo.playground/Pages/page-1.xcplaygroundpage/Contents.swift
+        guard let url = Bundle.main.url(forResource: spriteName, withExtension: "mov") else {
+            print("Can't find example video")
+            return
+        }
+
+        // Creating our player
+        let playerItem = AVPlayerItem(url: url)
+        let player = AVQueuePlayer(playerItem: playerItem)
+//        let playerLooper = AVPlayerLooper(player: player, templateItem: playerItem)
+
+        // Getting the size of our video
+        let videoTrack = playerItem.asset.tracks(withMediaType: .video).first!
+        let videoSize = videoTrack.naturalSize
+
+        // Adding a `SKVideoNode` to display video in our scene
+        sprite = SKVideoNode(avPlayer: player)
         sprite?.position = CGPoint(x: gameScene.size.width / 2, y: gameScene.size.height / 2 + heightOffset)
 
-        spriteNext = sprite?.copy() as? SKVideoNode
-        spriteNext?.position = CGPoint(x: CGFloat((sprite?.position.x)!) + (sprite?.size.width)!, y: (sprite?.position.y)!)
+        sprite?.size = videoSize.applying(CGAffineTransform(scaleX: 1.0, y: 0.5))
 
-        sprite?.zPosition = zPosition
-        spriteNext?.zPosition = zPosition
-        offset = 0
-        offsetNext = 0
+        // Let's make it transparent, using an SKEffectNode,
+        // since a shader cannot be applied to a SKVideoNode directly
+        effectNode = SKEffectNode()
+        // Loving Swift's multiline syntax here:
+        effectNode.shader = SKShader(source: """
+void main() {
+  vec2 texCoords = v_tex_coord;
+  vec2 colorCoords = vec2(texCoords.x, (1.0 + texCoords.y) * 0.5);
+  vec2 alphaCoords = vec2(texCoords.x, texCoords.y * 0.5);
+  vec4 color = texture2D(u_texture, colorCoords);
+  float alpha = texture2D(u_texture, alphaCoords).r;
+  gl_FragColor = vec4(color.rgb, alpha);
+}
+""")
+        gameScene.addChild(effectNode)
+        effectNode.addChild(sprite!)
 
-        sprite?.play()
-        spriteNext?.play()
+        // Start playing your video
+        player.play()
+        
+        
+//        let stringPath = Bundle.main.path(forResource: spriteName, ofType: "mov")
+//        let path = URL(fileURLWithPath:stringPath!)
+//        self.sprite = SKVideoNode(url: path)
+////        self.spriteNext = spriteNext
+//        sprite?.position = CGPoint(x: gameScene.size.width / 2, y: gameScene.size.height / 2 + heightOffset)
+//
+//        spriteNext = sprite?.copy() as? SKVideoNode
+//        spriteNext?.position = CGPoint(x: CGFloat((sprite?.position.x)!) + (sprite?.size.width)!, y: (sprite?.position.y)!)
+//
+//        sprite?.zPosition = zPosition
+//        spriteNext?.zPosition = zPosition
+//        offset = 0
+//        offsetNext = 0
+//
+//        sprite?.play()
+//        spriteNext?.play()
     }
     
     func updateCamera(camera: SKCameraNode) {
+        effectNode.position.x = camera.position.x + offset!
+        effectNode.position.y = camera.position.y
         sprite?.position.x = camera.position.x + offset!
         sprite?.position.y = camera.position.y
         spriteNext?.position.x = camera.position.x + offsetNext!
