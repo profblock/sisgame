@@ -40,6 +40,9 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
     private var score: CGFloat?
     let scoreScalingFactor: CGFloat = 0.01
     private var ground: Boundary?
+    private let normalGravity = CGVector(dx: 0, dy: -9.8)
+    private let noGravity = CGVector(dx: 0, dy: 0)
+    private var oldSpeed = CGVector.zero
     
     //Change to false enable death wall
     let debug : Bool = true
@@ -100,7 +103,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
             } else if(myCamera.leftScreen.contains(touch.location(in: self.myCamera))){
                 // Only allow launching if we have stamina
                 if ball.stamina > CGFloat(0) {
-                    //lightPause()
+                    lightPause()
                     launcher?.create(tap: touch.location(in: self.myCamera), stamina: ball.stamina)
                     isLauncherOnScreen = true;
                 }
@@ -142,11 +145,10 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         if let touch = touches.first, let startPoint = self.startPoint{
-            if(myCamera.pauseButton.contains(touch.location(in: self.myCamera))){
-            } else if(myCamera.leftScreen.contains(touch.location(in: self.myCamera))){
+            if(myCamera.leftScreen.contains(touch.location(in: self.myCamera))){
                 //physicsWorld.speed = 1
                 if(myCamera.leftScreen.contains(self.startPoint!) && isLauncherOnScreen){
-                    //normalSpeed()
+                    normalSpeed()
                     launcher?.destroy()
                     isLauncherOnScreen = false;
                     
@@ -154,15 +156,6 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
                     
                     ball.launchBall(startPoint: startPoint, endPoint: endPoint)
                 }
-                
-            } else if(myCamera.rightScreen.contains(touch.location(in: self.myCamera))){
-                
-                
-            }
-            if(isLauncherOnScreen == true){
-                //normalSpeed()
-                launcher?.destroy()
-                isLauncherOnScreen = false;
             }
             
         }
@@ -235,5 +228,41 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
 //        let yPos = self.size.height/2.0 - ball!.position.y
 //        mainNode?.position = CGPoint(x:xPos,y:yPos)
 //    }
+    
+    //This kills Gravity and decreaes the speed to a crall. This SHOULD work for SHORT times as long as you don't collide with anything.
+    //TODO: Find better approach or fix this when collisions occur (old velocity will be very wrong in that case
+    func lightPause(){
+        self.camera?.run(SKAction.scale(by: 1.2, duration: 5.0))
+        
+        guard ball.physicsBody?.velocity != nil else {
+            return
+        }
+        oldSpeed = ball.physicsBody!.velocity
+        self.physicsWorld.gravity = noGravity
+        let slowFactor = CGFloat(0.1)
+        let slowSpeed = CGVector(dx: oldSpeed.dx * slowFactor, dy: oldSpeed.dy * slowFactor)
+        ball.physicsBody?.velocity = slowSpeed
+    }
+    
+    func normalSpeed(){
+        self.camera?.run(SKAction.scale(to: 1.0, duration: 1.0))
+        
+        self.physicsWorld.gravity = self.normalGravity
+        guard ball.physicsBody?.velocity != nil else {
+            return
+        }
+        //True if BOTH are different directions. If current velicty has flipped, then flip old speed
+        var dx = oldSpeed.dx
+        var dy = oldSpeed.dy
+        if ball.physicsBody!.velocity.dx * oldSpeed.dx < 0 {
+            
+            dx = -dx
+        }
+        if ball.physicsBody!.velocity.dy * oldSpeed.dy < 0 {
+            
+            dy = -dy
+        }
+        ball.physicsBody?.velocity = CGVector(dx: dx, dy: dy)
+    }
     
 }
