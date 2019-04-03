@@ -37,6 +37,16 @@ class CoinBrick: Contactable{
         self.physicsBody?.collisionBitMask = PhysicsCategory.None
     }
     
+    override func toggle() {
+        if isCoin {
+            self.texture = SKTexture(imageNamed: "Brick")
+        } else {
+            self.texture = SKTexture(imageNamed: "Coin")
+        }
+        
+        isCoin.toggle()
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
