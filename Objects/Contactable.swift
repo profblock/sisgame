@@ -28,4 +28,8 @@ class Contactable: World{
         
     }
     
+    func toggle(){
+        
+    }
+    
 }

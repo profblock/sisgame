@@ -40,7 +40,7 @@ class Player:Interactive{
         
         self.physicsBody?.contactTestBitMask = PhysicsCategory.Ball
         self.physicsBody?.categoryBitMask = PhysicsCategory.Ball
-        self.physicsBody?.collisionBitMask = PhysicsCategory.Ball | PhysicsCategory.Ground | PhysicsCategory.Wall
+        self.physicsBody?.collisionBitMask = PhysicsCategory.Ball | PhysicsCategory.Ground | PhysicsCategory.Wall | PhysicsCategory.Brick
         self.physicsBody?.fieldBitMask = PhysicsCategory.Field
         
         

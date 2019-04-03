@@ -17,6 +17,7 @@ struct PhysicsCategory {
     static let Coin: UInt32 = 0b100      // 4
     static let Wall: UInt32 = 0b1000      // 8
     static let Field: UInt32 = 0b10000      // 16
+    static let Brick: UInt32 = 0b100000      // 32
 }
 
 //SKScenes are the "view" equivalant for sprite kit.
@@ -44,6 +45,8 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
     private let noGravity = CGVector(dx: 0, dy: 0)
     private var oldSpeed = CGVector.zero
     
+    var coin:CoinBrick!
+    var brick:CoinBrick!
     private var par1:ParallaxBackground?
     private var par2:ParallaxBackground?
     
@@ -74,8 +77,8 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(self.safeWall!)
         self.addChild(ground!)
         
-        let coin = CoinBrick(position:CGPoint(x: ball.position.x+200, y: ball.position.y+200), isCoin: true)
-        let brick = CoinBrick(position:CGPoint(x: ball.position.x+200, y: ball.position.y-200),isCoin: false)
+        coin = CoinBrick(position:CGPoint(x: ball.position.x+200, y: ball.position.y+200), isCoin: true)
+        brick = CoinBrick(position:CGPoint(x: ball.position.x+200, y: ball.position.y-200),isCoin: false)
         
         self.addChild(coin)
         self.addChild(brick)
@@ -84,7 +87,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         myCamera = Camera()
         self.camera = myCamera
         self.addChild(myCamera)
-        myCamera.initHelper();
+        myCamera.initHelper()
         myCamera.addChild(staminaBar)
         staminaBar.initHelper()
         launcher = Launcher(mainNode: myCamera)
@@ -131,6 +134,8 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
                     self.objectsAreActivated = false
                     myCamera.rightScreen.strokeColor = .purple
                 }
+                coin.toggle()
+                brick.toggle()
             }
             
 
@@ -167,6 +172,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
                     normalSpeed()
                     launcher?.destroy()
                     isLauncherOnScreen = false;
+                    
                     
                     let endPoint = touch.location(in: self.myCamera)
                     
