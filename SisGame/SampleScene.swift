@@ -152,7 +152,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
                     ball.stamina = 0
                     launcher?.destroy()
                     isLauncherOnScreen = false
-                    //normalSpeed()
+                    normalSpeed()
                 }
                 
                 
@@ -254,37 +254,42 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
     //This kills Gravity and decreaes the speed to a crall. This SHOULD work for SHORT times as long as you don't collide with anything.
     //TODO: Find better approach or fix this when collisions occur (old velocity will be very wrong in that case
     func lightPause(){
-        self.camera?.run(SKAction.scale(by: 1.2, duration: 5.0))
+//        self.camera?.run(SKAction.scale(by: 1.2, duration: 5.0))
+//
+//        guard ball.physicsBody?.velocity != nil else {
+//            return
+//        }
+//        oldSpeed = ball.physicsBody!.velocity
+//        self.physicsWorld.gravity = noGravity
+//        let slowFactor = CGFloat(0.1)
+//        let slowSpeed = CGVector(dx: oldSpeed.dx * slowFactor, dy: oldSpeed.dy * slowFactor)
+//        ball.physicsBody?.velocity = slowSpeed
         
-        guard ball.physicsBody?.velocity != nil else {
-            return
-        }
-        oldSpeed = ball.physicsBody!.velocity
-        self.physicsWorld.gravity = noGravity
-        let slowFactor = CGFloat(0.1)
-        let slowSpeed = CGVector(dx: oldSpeed.dx * slowFactor, dy: oldSpeed.dy * slowFactor)
-        ball.physicsBody?.velocity = slowSpeed
+        let speedScaleFactor: CGFloat = 0.2
+        self.scene?.physicsWorld.speed = speedScaleFactor
     }
     
     func normalSpeed(){
-        self.camera?.run(SKAction.scale(to: 1.0, duration: 1.0))
+//        self.camera?.run(SKAction.scale(to: 1.0, duration: 1.0))
+//
+//        self.physicsWorld.gravity = self.normalGravity
+//        guard ball.physicsBody?.velocity != nil else {
+//            return
+//        }
+//        //True if BOTH are different directions. If current velicty has flipped, then flip old speed
+//        var dx = oldSpeed.dx
+//        var dy = oldSpeed.dy
+//        if ball.physicsBody!.velocity.dx * oldSpeed.dx < 0 {
+//
+//            dx = -dx
+//        }
+//        if ball.physicsBody!.velocity.dy * oldSpeed.dy < 0 {
+//
+//            dy = -dy
+//        }
+//        ball.physicsBody?.velocity = CGVector(dx: dx, dy: dy)
         
-        self.physicsWorld.gravity = self.normalGravity
-        guard ball.physicsBody?.velocity != nil else {
-            return
-        }
-        //True if BOTH are different directions. If current velicty has flipped, then flip old speed
-        var dx = oldSpeed.dx
-        var dy = oldSpeed.dy
-        if ball.physicsBody!.velocity.dx * oldSpeed.dx < 0 {
-            
-            dx = -dx
-        }
-        if ball.physicsBody!.velocity.dy * oldSpeed.dy < 0 {
-            
-            dy = -dy
-        }
-        ball.physicsBody?.velocity = CGVector(dx: dx, dy: dy)
+        self.scene?.physicsWorld.speed = 1.0
     }
     
 }
