@@ -18,6 +18,7 @@ struct PhysicsCategory {
     static let Wall: UInt32 = 0b1000      // 8
     static let Field: UInt32 = 0b10000      // 16
     static let Brick: UInt32 = 0b100000      // 32
+    static let Enemy: UInt32 = 0b1000000      // 64
 }
 
 //SKScenes are the "view" equivalant for sprite kit.
@@ -48,6 +49,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
     
     var coin:CoinBrick!
     var brick:CoinBrick!
+    var enemy:Enemy!
     private var par1:ParallaxBackground?
     private var par2:ParallaxBackground?
     
@@ -84,6 +86,14 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(coin)
         self.addChild(brick)
         
+        let path = CGMutablePath()
+        
+        let enemyStartPoint = CGPoint(x: ball.position.x+100, y: ball.position.y+100)
+        path.move(to: CGPoint(x:0,y:0))
+        let enemyEndPoint = CGPoint(x: ball.position.x+300, y: ball.position.y+100)
+        path.addLine(to: CGPoint(x:100,y:100))
+        enemy = Enemy(typeOfEnemy: Enemy.TypeOfEnemy.basic,position:enemyStartPoint, path: path )
+        self.addChild(enemy)
         
         myCamera = Camera()
         self.camera = myCamera
@@ -250,6 +260,19 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
 //                print("hmm")
 //                return // No need for more collision checks if we accomplished our goal
 //            }
+        }
+        
+        if ((firstBody.categoryBitMask & PhysicsCategory.Ball != 0) &&
+            (secondBody.categoryBitMask & PhysicsCategory.Enemy != 0)) {
+            print("The ball came into contact with an Enemy")
+            // _ here is the ball, but we never reference it
+            //may end up doing something with the brick, but otherwise. No
+            //Code is incorrect because they aren't skshapenode
+            //            if let _ = firstBody.node as? SKShapeNode, let
+            //                coin = secondBody.node as? SKShapeNode {
+            //                print("hmm")
+            //                return // No need for more collision checks if we accomplished our goal
+            //            }
         }
         
         if ((firstBody.categoryBitMask & PhysicsCategory.Ball != 0) &&
