@@ -227,11 +227,13 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
             // _ here is the ball, but we never reference it
             print("The ball came into contact with a coin")
             secondBody.node?.removeFromParent()
-            if let _ = firstBody.node as? SKShapeNode, let
-                coin = secondBody.node as? SKShapeNode {
-                coin.removeFromParent()
-                return // No need for more collision checks if we accomplished our goal
-            }
+            //may end up doing something with the coin, but otherwise. No
+            //Code is incorrect because they aren't skshapenode
+//            if let _ = firstBody.node as? SKShapeNode, let
+//                coin = secondBody.node as? SKShapeNode {
+//                coin.removeFromParent()
+//                return // No need for more collision checks if we accomplished our goal
+//            }
         }
         
         // 3
@@ -239,11 +241,13 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
             (secondBody.categoryBitMask & PhysicsCategory.Brick != 0)) {
             print("The ball came into contact with a brick")
             // _ here is the ball, but we never reference it
-            if let _ = firstBody.node as? SKShapeNode, let
-                coin = secondBody.node as? SKShapeNode {
-                print("hmm")
-                return // No need for more collision checks if we accomplished our goal
-            }
+            //may end up doing something with the brick, but otherwise. No
+            //Code is incorrect because they aren't skshapenode
+//            if let _ = firstBody.node as? SKShapeNode, let
+//                coin = secondBody.node as? SKShapeNode {
+//                print("hmm")
+//                return // No need for more collision checks if we accomplished our goal
+//            }
         }
         
         if ((firstBody.categoryBitMask & PhysicsCategory.Ball != 0) &&
