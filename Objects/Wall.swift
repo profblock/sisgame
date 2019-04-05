@@ -13,18 +13,16 @@ import SpriteKit
 class Wall: SKShapeNode {
 
     var distanceAway:Int!
+    var isMoving = true
+    let maxDistance: CGFloat = 1000.0
+    
     
     override convenience init() {
-//        super.init()
-        
-//        let upperBoundPoint = CGPoint(x: 0, y: 10000)
-//        var linePoints = [CGPoint(x: 0, y: 0), upperBoundPoint]
         self.init(startX : 0.0, color : UIColor.red, doesKill : true)
-
-        
     }
     
     init(startX : CGFloat, color : UIColor, doesKill : Bool) {
+        
         super.init()
         
         self.path = CGPath(rect: CGRect(x: startX, y: 0, width: 1, height: 10000), transform: nil)
@@ -50,8 +48,14 @@ class Wall: SKShapeNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func moveWall(){
-        self.position.x += 1
+    func moveWall(currentPositionOfPlayer:CGPoint){
+        if isMoving {
+            self.position.x += 1
+            if currentPositionOfPlayer.x - maxDistance  > self.position.x{
+                self.position.x = currentPositionOfPlayer.x - maxDistance
+            }
+        }
+        
     }
     
     

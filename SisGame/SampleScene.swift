@@ -45,6 +45,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
     private let noGravity = CGVector(dx: 0, dy: 0)
     private var oldSpeed = CGVector.zero
     
+    
     var coin:CoinBrick!
     var brick:CoinBrick!
     private var par1:ParallaxBackground?
@@ -95,7 +96,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func didFinishUpdate() {
-        self.deathWall!.moveWall()
+        self.deathWall!.moveWall(currentPositionOfPlayer: ball.position)
         // Updating score label in UI
         self.myCamera.updateScore(score: score!)
         
@@ -270,7 +271,8 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
     //This kills Gravity and decreaes the speed to a crall. This SHOULD work for SHORT times as long as you don't collide with anything.
     //TODO: Find better approach or fix this when collisions occur (old velocity will be very wrong in that case
     func lightPause(){
-//        self.camera?.run(SKAction.scale(by: 1.2, duration: 5.0))
+        self.camera?.run(SKAction.scale(by: 1.4, duration: 5.0))
+        
 //
 //        guard ball.physicsBody?.velocity != nil else {
 //            return
@@ -280,13 +282,13 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
 //        let slowFactor = CGFloat(0.1)
 //        let slowSpeed = CGVector(dx: oldSpeed.dx * slowFactor, dy: oldSpeed.dy * slowFactor)
 //        ball.physicsBody?.velocity = slowSpeed
-        
-        let speedScaleFactor: CGFloat = 0.2
+        deathWall.isMoving = false
+        let speedScaleFactor: CGFloat = 0.0
         self.scene?.physicsWorld.speed = speedScaleFactor
     }
     
     func normalSpeed(){
-//        self.camera?.run(SKAction.scale(to: 1.0, duration: 1.0))
+        self.camera?.run(SKAction.scale(to: 1.0, duration: 0.5))
 //
 //        self.physicsWorld.gravity = self.normalGravity
 //        guard ball.physicsBody?.velocity != nil else {
@@ -305,6 +307,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
 //        }
 //        ball.physicsBody?.velocity = CGVector(dx: dx, dy: dy)
         
+        deathWall.isMoving = true
         self.scene?.physicsWorld.speed = 1.0
     }
     
