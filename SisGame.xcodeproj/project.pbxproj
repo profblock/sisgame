@@ -24,7 +24,6 @@
 		96F8A90D22289651009DEE0F /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A90C22289651009DEE0F /* Enemy.swift */; };
 		96F8A90F22289659009DEE0F /* Well.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A90E22289659009DEE0F /* Well.swift */; };
 		96F8A9122228969D009DEE0F /* Spikes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A9112228969D009DEE0F /* Spikes.swift */; };
-		96F8A916222896DA009DEE0F /* Parallax.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A915222896DA009DEE0F /* Parallax.swift */; };
 		96F8A91A2228A2C2009DEE0F /* CoinBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A9192228A2C2009DEE0F /* CoinBrick.swift */; };
 		96F8A91E2228A44B009DEE0F /* StaminaBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A91D2228A44B009DEE0F /* StaminaBar.swift */; };
 		96F8A9202228A4CD009DEE0F /* DeathWallEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A91F2228A4CD009DEE0F /* DeathWallEffects.swift */; };
@@ -56,7 +55,6 @@
 		96F8A90C22289651009DEE0F /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		96F8A90E22289659009DEE0F /* Well.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Well.swift; sourceTree = "<group>"; };
 		96F8A9112228969D009DEE0F /* Spikes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spikes.swift; sourceTree = "<group>"; };
-		96F8A915222896DA009DEE0F /* Parallax.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parallax.swift; sourceTree = "<group>"; };
 		96F8A9192228A2C2009DEE0F /* CoinBrick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinBrick.swift; sourceTree = "<group>"; };
 		96F8A91D2228A44B009DEE0F /* StaminaBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaminaBar.swift; sourceTree = "<group>"; };
 		96F8A91F2228A4CD009DEE0F /* DeathWallEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeathWallEffects.swift; sourceTree = "<group>"; };
@@ -128,7 +126,6 @@
 				96F8A90C22289651009DEE0F /* Enemy.swift */,
 				96F8A90E22289659009DEE0F /* Well.swift */,
 				96F8A9112228969D009DEE0F /* Spikes.swift */,
-				96F8A915222896DA009DEE0F /* Parallax.swift */,
 				96F8A9192228A2C2009DEE0F /* CoinBrick.swift */,
 				96F8A91D2228A44B009DEE0F /* StaminaBar.swift */,
 				96F8A91F2228A4CD009DEE0F /* DeathWallEffects.swift */,
@@ -221,7 +218,6 @@
 				96F8A91A2228A2C2009DEE0F /* CoinBrick.swift in Sources */,
 				96FC26F3224AC84B00F41A5B /* Launcher.swift in Sources */,
 				96F8A905222895F5009DEE0F /* Wall.swift in Sources */,
-				96F8A916222896DA009DEE0F /* Parallax.swift in Sources */,
 				96F8A90D22289651009DEE0F /* Enemy.swift in Sources */,
 				96F8A901222895AD009DEE0F /* Noninteractive.swift in Sources */,
 				96F8A9122228969D009DEE0F /* Spikes.swift in Sources */,

@@ -99,6 +99,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         self.deathWall!.moveWall(currentPositionOfPlayer: ball.position)
         // Updating score label in UI
         self.myCamera.updateScore(score: score!)
+        par1?.updateCamera(camera: self.myCamera)
         
         // TODO: Change from 300 to double of the width of the screen
         if(ball.position.x >= ground!.prevFinalPoint!.x - 300) {

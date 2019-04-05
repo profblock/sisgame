@@ -27,6 +27,8 @@ class ParallaxBackground {
             return
         }
 
+        offset = 0.0
+        offsetNext = 0.0
         // Creating our player
         let playerItem = AVPlayerItem(url: url)
         let player = AVQueuePlayer(playerItem: playerItem)
@@ -84,8 +86,8 @@ void main() {
     func updateCamera(camera: SKCameraNode) {
         effectNode.position.x = camera.position.x + offset!
         effectNode.position.y = camera.position.y
-        sprite?.position.x = camera.position.x + offset!
-        sprite?.position.y = camera.position.y
+//        sprite?.position.x = camera.position.x + offset!
+//        sprite?.position.y = camera.position.y
         spriteNext?.position.x = camera.position.x + offsetNext!
         spriteNext?.position.y = camera.position.y
     }
