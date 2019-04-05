@@ -20,7 +20,7 @@ class CoinBrick: Contactable{
         
         //Dimensions for texture
         let color = UIColor.clear
-        let size = CGSize(width: 400.0,height: 400.0)
+        let size = CGSize(width: 100.0,height: 100.0)
         
         let texture:SKTexture
         if isCoin {
@@ -30,14 +30,17 @@ class CoinBrick: Contactable{
         }
         
         super.init(texture: texture, color: color, size: size)
+        
+        self.physicsBody = SKPhysicsBody(texture: self.texture!, size: self.size)
+        self.physicsBody?.isDynamic = false
         if isCoin {
             self.physicsBody?.categoryBitMask = PhysicsCategory.Coin
             self.physicsBody?.collisionBitMask = PhysicsCategory.None
             self.physicsBody?.contactTestBitMask = PhysicsCategory.Ball
         } else {
             self.physicsBody?.categoryBitMask = PhysicsCategory.Brick
-            self.physicsBody?.collisionBitMask = PhysicsCategory.Ball
-            self.physicsBody?.contactTestBitMask = PhysicsCategory.None
+            self.physicsBody?.collisionBitMask = PhysicsCategory.None
+            self.physicsBody?.contactTestBitMask = PhysicsCategory.Ball
         }
         self.position = position
     }

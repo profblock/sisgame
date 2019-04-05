@@ -80,8 +80,8 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         coin = CoinBrick(position:CGPoint(x: ball.position.x+200, y: ball.position.y+200), isCoin: true)
         brick = CoinBrick(position:CGPoint(x: ball.position.x+200, y: ball.position.y-200),isCoin: false)
         
-//        self.addChild(coin)
-//        self.addChild(brick)
+        self.addChild(coin)
+        self.addChild(brick)
         
         
         myCamera = Camera()
@@ -225,12 +225,24 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         if ((firstBody.categoryBitMask & PhysicsCategory.Ball != 0) &&
             (secondBody.categoryBitMask & PhysicsCategory.Coin != 0)) {
             // _ here is the ball, but we never reference it
+            print("The ball came into contact with a coin")
+            secondBody.node?.removeFromParent()
             if let _ = firstBody.node as? SKShapeNode, let
                 coin = secondBody.node as? SKShapeNode {
                 coin.removeFromParent()
                 return // No need for more collision checks if we accomplished our goal
-                
-                //                projectileDidCollideWithMonster(projectile: projectile, monster: monster)
+            }
+        }
+        
+        // 3
+        if ((firstBody.categoryBitMask & PhysicsCategory.Ball != 0) &&
+            (secondBody.categoryBitMask & PhysicsCategory.Brick != 0)) {
+            print("The ball came into contact with a brick")
+            // _ here is the ball, but we never reference it
+            if let _ = firstBody.node as? SKShapeNode, let
+                coin = secondBody.node as? SKShapeNode {
+                print("hmm")
+                return // No need for more collision checks if we accomplished our goal
             }
         }
         
