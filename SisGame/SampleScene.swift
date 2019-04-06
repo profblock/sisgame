@@ -53,6 +53,12 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
     private var par1:ParallaxBackground?
     private var par2:ParallaxBackground?
     
+    // Time of last frame
+    private var lastFrameTime : TimeInterval = 0
+    
+    // Time since last frame
+    private var deltaTime : TimeInterval = 0
+    
     //Change to false enable death wall
     let debug : Bool = true
     
@@ -212,6 +218,19 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
             launcher?.repaint(stamina: ball.stamina)
         }
         staminaBar.changeStamina(newStamina: ball.stamina)
+        
+        // If we don't have a last frame time value, this is the first frame,
+        // so delta time will be zero.
+        if lastFrameTime <= 0 {
+            lastFrameTime = currentTime
+        }
+        
+        // Update delta time
+        deltaTime = currentTime - lastFrameTime
+        
+        // Moving the parallax background with a scaling factor based on player's velocity
+        par1?.move(scene: self, speed: (ball.physicsBody!.velocity.dx * 0.0001), deltaTime: deltaTime)
+
         
         // Updating score value, based on distance travelled and scaling factor
         score = CGFloat(ball.calculateDistanceTravelled() * scoreScalingFactor).rounded()
