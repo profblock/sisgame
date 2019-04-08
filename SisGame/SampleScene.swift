@@ -199,6 +199,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
                     normalSpeed()
                     staminaBar.endProjection()
                     launcher?.destroy()
+                    staminaLoss = 0.0
                     isLauncherOnScreen = false;
                     
                     
@@ -225,7 +226,20 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
             }
         } else {
             ball.stamina -= staminaDecreaseRate
-            launcher?.repaint(stamina: ball.stamina-staminaLoss)
+            let repaintOutcome = launcher!.repaint(stamina: ball.stamina)
+            // If we couldn't repaint, it's because the mainCircle is too small
+            // and the player has run out of stamina
+            if(!repaintOutcome) {
+                // If we've run out of stamina, we destroy the launcher,
+                // reset staminaLoss and the game's speed, ensure the player's stamina is empty
+                // and end the projection of the stamina bar
+                launcher?.destroy()
+                isLauncherOnScreen = false
+                normalSpeed()
+                staminaLoss = 0.0
+                ball.stamina = 0.0
+                staminaBar.endProjection()
+            }
         }
         staminaBar.changeStamina(newStamina: ball.stamina-staminaLoss)
         

@@ -19,9 +19,9 @@ class StaminaBar: Noninteractive{
     var screenRegionYBound: CGFloat!
     var projectedBar:SKShapeNode!
     
-    let emptyColor : UIColor  = .gray
-    let projectedColor : UIColor = .blue
-    let actualColor : UIColor = .red
+    let emptyColor : UIColor  = .darkGray
+    let projectedColor : UIColor = .white
+    let actualColor : UIColor = .blue
     var widthOfActual : CGFloat = 1.0
     var widthOfProjected : CGFloat = 1.0
     

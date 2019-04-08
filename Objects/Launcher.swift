@@ -18,6 +18,8 @@ class Launcher {
     var mainCircle : SKShapeNode?
     
     var touchLine : SKShapeNode?
+    
+    let sizeOffset : CGFloat = 1.2
 
     init(mainNode : SKNode?) {
         self.mainNode = mainNode
@@ -40,16 +42,19 @@ class Launcher {
     }
     
     // Repaints just the big circle; called in update()
-    func repaint(stamina : CGFloat) {
-        if(stamina <= 0) {
+    // Returns true if successful, false if failed
+    func repaint(stamina : CGFloat) -> Bool {
+        if(stamina <= 0 || mainCircle == nil) {
             destroy()
-            return
+            return false
         }
         let circlePos : CGPoint = mainCircle!.position
         mainCircle?.removeFromParent()
-        mainCircle = SKShapeNode(circleOfRadius: stamina)
+        mainCircle = SKShapeNode(circleOfRadius: stamina * sizeOffset)
         mainCircle?.position = circlePos
         mainNode?.addChild(mainCircle!)
+        
+        return true
     }
     
     // Repaints the big circle around everything and the second touch
@@ -58,7 +63,7 @@ class Launcher {
 //        mainCircle?.xScale *= 0.9
 //        mainCircle?.yScale *= 0.9
         
-        repaint(stamina: stamina)
+        repaint(stamina: stamina * sizeOffset)
         
         if(secondTouch == nil) {
             secondTouch = SKShapeNode(circleOfRadius: 7)
