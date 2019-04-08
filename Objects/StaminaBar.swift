@@ -22,6 +22,8 @@ class StaminaBar: Noninteractive{
     let emptyColor : UIColor  = .gray
     let projectedColor : UIColor = .blue
     let actualColor : UIColor = .red
+    var widthOfActual : CGFloat = 1.0
+    var widthOfProjected : CGFloat = 1.0
     
     init(stamina:CGFloat) {
         self.stamina = stamina
@@ -65,14 +67,20 @@ class StaminaBar: Noninteractive{
     func changeStamina(newStamina:CGFloat){
         let staminaVertOffset : CGFloat = 30.0
         self.stamina = newStamina
-        actualBar.path = CGPath(rect: CGRect(x: -stamina, y: (screenRegionYBound/2) - staminaVertOffset, width: stamina*2, height: 30), transform: nil)
+        widthOfActual = stamina*2
+        actualBar.path = CGPath(rect: CGRect(x: -stamina, y: (screenRegionYBound/2) - staminaVertOffset, width: widthOfActual, height: 30), transform: nil)
     }
     
     func startProjection(){
+        projectedBar.xScale = 1.0
         projectedBar.path = actualBar.path
+        widthOfProjected = widthOfActual
+        
     }
     
     func endProjection(){
+        let scaleFactor = (widthOfActual/widthOfProjected) * 0.8 //scale to 80% of the projected
+        projectedBar.run(SKAction.scaleX(by: scaleFactor, y: 1.0, duration: 0.4))
         
     }
     

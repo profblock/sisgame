@@ -39,6 +39,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
     private var launcher : Launcher?
     private var isLauncherOnScreen = false
     private var staminaBar: StaminaBar!
+    var staminaLoss : CGFloat = 0.0
     private var score: CGFloat?
     let scoreScalingFactor: CGFloat = 0.01
     private var ground: Boundary?
@@ -46,7 +47,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
     private let noGravity = CGVector(dx: 0, dy: 0)
     private var oldSpeed = CGVector.zero
     
-    
+
     var coin:CoinBrick!
     var brick:CoinBrick!
     var enemy:Enemy!
@@ -146,6 +147,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
                 // Only allow launching if we have stamina
                 if ball.stamina > CGFloat(0) {
                     lightPause()
+                    staminaLoss = 0.0
                     staminaBar.startProjection()
                     launcher?.create(tap: touch.location(in: self.myCamera), stamina: ball.stamina)
                     isLauncherOnScreen = true;
@@ -168,10 +170,11 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
     
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch = touches.first{
+        if let touch = touches.first, let startPoint = self.startPoint{
             if(myCamera.leftScreen.contains(self.startPoint!) && isLauncherOnScreen == true){
                 launcher?.repaint(curTap: touch.location(in: self.myCamera), stamina: ball.stamina)
-                //ball.stamina = ball.stamina - 1
+                let endPoint = touch.location(in: self.myCamera)
+                staminaLoss = Player.projectedStamina(startPoint: startPoint, endPoint: endPoint)
                 if(ball.stamina < CGFloat(0)) {
                     ball.stamina = 0
                     launcher?.destroy()
@@ -194,6 +197,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
                 //physicsWorld.speed = 1
                 if(myCamera.leftScreen.contains(self.startPoint!) && isLauncherOnScreen){
                     normalSpeed()
+                    staminaBar.endProjection()
                     launcher?.destroy()
                     isLauncherOnScreen = false;
                     
@@ -221,9 +225,9 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
             }
         } else {
             ball.stamina -= staminaDecreaseRate
-            launcher?.repaint(stamina: ball.stamina)
+            launcher?.repaint(stamina: ball.stamina-staminaLoss)
         }
-        staminaBar.changeStamina(newStamina: ball.stamina)
+        staminaBar.changeStamina(newStamina: ball.stamina-staminaLoss)
         
         // If we don't have a last frame time value, this is the first frame,
         // so delta time will be zero.
