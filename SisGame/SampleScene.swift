@@ -62,6 +62,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
     //Change to false enable death wall
     let debug : Bool = true
     
+    
     //didMove is the method that is called when the system is loaded.
     override func didMove(to view: SKView) {
         
@@ -108,6 +109,10 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         myCamera.addChild(staminaBar)
         staminaBar.initHelper()
         launcher = Launcher(mainNode: myCamera)
+        
+        
+        
+
         
     }
     

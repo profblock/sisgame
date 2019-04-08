@@ -20,7 +20,7 @@ class CoinBrick: Contactable{
         
         //Dimensions for texture
         let color = UIColor.clear
-        let size = CGSize(width: 100.0,height: 100.0)
+        let size = CGSize(width: 55.0,height: 55.0)
         
         let texture:SKTexture
         if isCoin {

@@ -15,6 +15,7 @@ class Wall: SKShapeNode {
     var distanceAway:Int!
     var isMoving = true
     let maxDistance: CGFloat = 1000.0
+    let height : CGFloat = 10000
     
     
     override convenience init() {
@@ -25,7 +26,7 @@ class Wall: SKShapeNode {
         
         super.init()
         
-        self.path = CGPath(rect: CGRect(x: startX, y: 0, width: 1, height: 10000), transform: nil)
+        self.path = CGPath(rect: CGRect(x: startX, y: 0, width: 1, height: height), transform: nil)
         
         
         self.lineWidth = 5
@@ -51,9 +52,11 @@ class Wall: SKShapeNode {
     func moveWall(currentPositionOfPlayer:CGPoint){
         if isMoving {
             self.position.x += 1
+            self.position.y = currentPositionOfPlayer.y - self.height/2.0
             if currentPositionOfPlayer.x - maxDistance  > self.position.x{
                 self.position.x = currentPositionOfPlayer.x - maxDistance
             }
+            
         }
         
     }

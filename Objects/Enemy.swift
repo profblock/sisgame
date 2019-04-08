@@ -22,7 +22,8 @@ class Enemy: Contactable{
         self.typeOfEnemy = typeOfEnemy
         //Dimensions for texture
         let color = UIColor.clear
-        let size = CGSize(width: 100.0,height: 100.0)
+        //Eventually, enimies will need different sizes but for now the same size.
+        let size = CGSize(width: 50.0,height: 50.0)
         
         let texture:SKTexture
         switch typeOfEnemy {
