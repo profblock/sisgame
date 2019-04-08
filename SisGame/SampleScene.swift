@@ -146,6 +146,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
                 // Only allow launching if we have stamina
                 if ball.stamina > CGFloat(0) {
                     lightPause()
+                    staminaBar.startProjection()
                     launcher?.create(tap: touch.location(in: self.myCamera), stamina: ball.stamina)
                     isLauncherOnScreen = true;
                 }
