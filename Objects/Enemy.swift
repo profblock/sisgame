@@ -43,33 +43,37 @@ class Enemy: Contactable{
         self.physicsBody = SKPhysicsBody(texture: self.texture!, size: self.size)
         self.physicsBody?.isDynamic = false
         self.physicsBody?.contactTestBitMask = PhysicsCategory.Ball
-        
+        self.physicsBody?.collisionBitMask = PhysicsCategory.None
+
+        // Setting texture and physicsBody according to whether or
+        // not this Enemy starts as "on"
         if isOn {
             self.texture = SKTexture(imageNamed: "Enemy")
             self.physicsBody?.categoryBitMask = PhysicsCategory.Enemy
-            self.physicsBody?.collisionBitMask = PhysicsCategory.None
         } else {
             self.texture = SKTexture(imageNamed: "EnemyOff")
             self.physicsBody?.categoryBitMask = PhysicsCategory.None
-            self.physicsBody?.contactTestBitMask = PhysicsCategory.None
         }
         
         self.position = position
         
+        // Code for moving the enemy along a path, used in previous iterations
 //        let primaryDirection = SKAction.follow(path, asOffset: true, orientToPath: false, duration: 2.0)
 //        let reverseDirection = primaryDirection.reversed()
 //        self.run(SKAction.repeatForever(SKAction.sequence([primaryDirection, reverseDirection])))
     }
     
 
+    // Toggles between being on/off, changes textures
+    // and determines whether the ball will collide or not
     override func toggle() {
         isOn.toggle()
         if isOn {
+            self.texture = SKTexture(imageNamed: "Enemy")
             self.physicsBody?.categoryBitMask = PhysicsCategory.Enemy
-            self.physicsBody?.collisionBitMask = PhysicsCategory.None
         } else {
+            self.texture = SKTexture(imageNamed: "EnemyOff")
             self.physicsBody?.categoryBitMask = PhysicsCategory.None
-            self.physicsBody?.contactTestBitMask = PhysicsCategory.None
         }
     }
     
