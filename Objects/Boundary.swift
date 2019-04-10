@@ -31,7 +31,7 @@ class Boundary: SKShapeNode{
         fatalError("init(coder:) has not been implemented")
     }
     
-    func addSegment() {
+    func addSegment() ->([CGPoint], [CGPoint]) {
         // Removes old splines from scene and memory
         // if we reach 3 splines on-screen
         if splineTracker?.count == arrayMaxSize {
@@ -71,6 +71,7 @@ class Boundary: SKShapeNode{
         splineTracker?.append(ceiling)
         splineTracker?.append(floor)
 
+        return (floorSplinePoints, ceilingSplinePoints)
         
     }
     

@@ -121,10 +121,34 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         staminaBar.initHelper()
         launcher = Launcher(mainNode: myCamera)
         
+    }
+    
+    func generateSegment(){
+        guard let ground = ground else {
+            return
+        }
+        let (floorSplinePoints, ceilingSplinePoints) = ground.addSegment()
         
+        var skip = Int.random(in: 1...10)
         
+        for index in 0..<floorSplinePoints.count {
+            let floorPoint = floorSplinePoints[index]
+            let ceiliningPoint = ceilingSplinePoints[index]
+            if skip <= 0 {
+                let yBufferDistance = CGFloat(25)
+                let randomY = CGFloat.random(in: (floorPoint.y + yBufferDistance)  ..< (ceiliningPoint.y - yBufferDistance))
+                let xRange = CGFloat(10.0)
+                let randomX  = CGFloat.random(in: (floorPoint.x - xRange) ..< (floorPoint.x + xRange) )
+                let contactablePoint = CGPoint(x: randomX, y: randomY)
+                let contacable = CoinBrick(position: contactablePoint, isCoin: Bool.random())
+                currentContactables.append(contacable)
+                self.addChild(contacable)
+                skip = Int.random(in: 1...10)
+            } else {
+                skip -= 1
+            }
+        }
 
-        
     }
     
     override func didFinishUpdate() {
@@ -135,7 +159,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         
         // TODO: Change from 300 to double of the width of the screen
         if(ball.position.x >= ground!.prevFinalPoint!.x - (self.view!.bounds.maxX * 2.0)) {
-            ground?.addSegment()
+             generateSegment()
         }
     }
     
