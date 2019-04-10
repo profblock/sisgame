@@ -124,7 +124,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         par1?.updateCamera(camera: self.myCamera)
         
         // TODO: Change from 300 to double of the width of the screen
-        if(ball.position.x >= ground!.prevFinalPoint!.x - 300) {
+        if(ball.position.x >= ground!.prevFinalPoint!.x - (self.view!.bounds.maxX * 2.0)) {
             ground?.addSegment()
         }
     }
