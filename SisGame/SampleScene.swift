@@ -9,6 +9,11 @@
 import UIKit
 import SpriteKit
 
+//2. Statically Populate array of contactables
+//3. Dynamically Populate array of contatables
+//4. Add new array of contaacbles with new segment
+//5. remove old array of contacables with old segment.
+
 struct PhysicsCategory {
     static let None      : UInt32 = 0
     static let All       : UInt32 = UInt32.max
@@ -48,9 +53,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
     private var oldSpeed = CGVector.zero
     
 
-    var coin:CoinBrick!
-    var brick:CoinBrick!
-    var enemy:Enemy!
+
     private var par1:ParallaxBackground?
     private var par2:ParallaxBackground?
     
@@ -62,6 +65,8 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
     
     //Change to false enable death wall
     let debug : Bool = true
+    
+    var currentContactables = [Contactable]()
     
     
     //didMove is the method that is called when the system is loaded.
@@ -88,11 +93,10 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(self.safeWall!)
         self.addChild(ground!)
         
-        coin = CoinBrick(position:CGPoint(x: ball.position.x+200, y: ball.position.y+200), isCoin: true)
-        brick = CoinBrick(position:CGPoint(x: ball.position.x+200, y: ball.position.y-200),isCoin: false)
+        // TODO: Move to array
+        let coin = CoinBrick(position:CGPoint(x: ball.position.x+200, y: ball.position.y+200), isCoin: true)
+        let brick = CoinBrick(position:CGPoint(x: ball.position.x+200, y: ball.position.y-200),isCoin: false)
         
-        self.addChild(coin)
-        self.addChild(brick)
         
         let path = CGMutablePath()
         
@@ -100,8 +104,14 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         path.move(to: CGPoint(x:0,y:0))
         let enemyEndPoint = CGPoint(x: ball.position.x+300, y: ball.position.y+100)
         path.addLine(to: CGPoint(x:100,y:100))
-        enemy = Enemy(typeOfEnemy: Enemy.TypeOfEnemy.basic,position:enemyStartPoint, path: path )
-        self.addChild(enemy)
+        let enemy = Enemy(typeOfEnemy: Enemy.TypeOfEnemy.basic,position:enemyStartPoint, path: path )
+        currentContactables.append(coin)
+        currentContactables.append(brick)
+        currentContactables.append(enemy)
+
+        for contacable in currentContactables {
+            self.addChild(contacable)
+        }
         
         myCamera = Camera()
         self.camera = myCamera
@@ -160,8 +170,9 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
                     self.objectsAreActivated = false
                     myCamera.rightScreen.strokeColor = .purple
                 }
-                coin.toggle()
-                brick.toggle()
+                for contacable in currentContactables {
+                    contacable.toggle()
+                }
             }
             
 
