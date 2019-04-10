@@ -32,7 +32,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
     private var mainNode:SKNode?
 
     
-    var ball : Player = Player()
+    var ball : Player!
     private var deathWall : Wall!
     private var safeWall : Wall!
     private var previousPosition: CGPoint!
@@ -74,6 +74,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         
         physicsWorld.contactDelegate = self
         score = 0
+        ball = Player()
         staminaBar = StaminaBar(stamina: ball.stamina)
         
         par1 = ParallaxBackground(spriteName: "Parallax-Diamonds-1", gameScene: self, heightOffset: 0, zPosition: -1)
@@ -98,19 +99,18 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         let brick = CoinBrick(position:CGPoint(x: ball.position.x+200, y: ball.position.y-200),isCoin: false)
         
         
-        let path = CGMutablePath()
-        
+//        let path = CGMutablePath()
         let enemyStartPoint = CGPoint(x: ball.position.x+100, y: ball.position.y+100)
-        path.move(to: CGPoint(x:0,y:0))
-        let enemyEndPoint = CGPoint(x: ball.position.x+300, y: ball.position.y+100)
-        path.addLine(to: CGPoint(x:100,y:100))
-        let enemy = Enemy(typeOfEnemy: Enemy.TypeOfEnemy.basic,position:enemyStartPoint, path: path )
+//        path.move(to: CGPoint(x:0,y:0))
+//        let enemyEndPoint = CGPoint(x: ball.position.x+300, y: ball.position.y+100)
+//        path.addLine(to: CGPoint(x:100,y:100))
+        let enemy = Enemy(typeOfEnemy: Enemy.TypeOfEnemy.basic,position:enemyStartPoint, isOn: true)
         currentContactables.append(coin)
         currentContactables.append(brick)
         currentContactables.append(enemy)
 
-        for contacable in currentContactables {
-            self.addChild(contacable)
+        for contactable in currentContactables {
+            self.addChild(contactable)
         }
         
         myCamera = Camera()
@@ -170,8 +170,8 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
                     self.objectsAreActivated = false
                     myCamera.rightScreen.strokeColor = .purple
                 }
-                for contacable in currentContactables {
-                    contacable.toggle()
+                for contactable in currentContactables {
+                    contactable.toggle()
                 }
             }
             
