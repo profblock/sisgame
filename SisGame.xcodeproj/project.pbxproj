@@ -13,6 +13,7 @@
 		8720E2EA220E1D9500B20EA0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8720E2E9220E1D9500B20EA0 /* Assets.xcassets */; };
 		8720E2ED220E1D9500B20EA0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8720E2EB220E1D9500B20EA0 /* LaunchScreen.storyboard */; };
 		8720E2F5220E1F1900B20EA0 /* SampleScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8720E2F4220E1F1900B20EA0 /* SampleScene.swift */; };
+		8764E5552260F2EC0068D5D8 /* GravityWell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8764E5542260F2EC0068D5D8 /* GravityWell.swift */; };
 		9603D53B222F224600682045 /* sface.png in Resources */ = {isa = PBXBuildFile; fileRef = 9603D53A222F224600682045 /* sface.png */; };
 		96F8A8FF22289562009DEE0F /* Interactive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A8FE22289562009DEE0F /* Interactive.swift */; };
 		96F8A901222895AD009DEE0F /* Noninteractive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8A900222895AD009DEE0F /* Noninteractive.swift */; };
@@ -44,6 +45,7 @@
 		8720E2EC220E1D9500B20EA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8720E2EE220E1D9500B20EA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8720E2F4220E1F1900B20EA0 /* SampleScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleScene.swift; sourceTree = "<group>"; };
+		8764E5542260F2EC0068D5D8 /* GravityWell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityWell.swift; sourceTree = "<group>"; };
 		9603D53A222F224600682045 /* sface.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sface.png; sourceTree = "<group>"; };
 		96F8A8FE22289562009DEE0F /* Interactive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactive.swift; sourceTree = "<group>"; };
 		96F8A900222895AD009DEE0F /* Noninteractive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Noninteractive.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				96F8A906222895FF009DEE0F /* Boundary.swift */,
 				96F8A90822289618009DEE0F /* Player.swift */,
 				96F8A90A2228963D009DEE0F /* Contactable.swift */,
+				8764E5542260F2EC0068D5D8 /* GravityWell.swift */,
 				96F8A90C22289651009DEE0F /* Enemy.swift */,
 				96F8A90E22289659009DEE0F /* Well.swift */,
 				96F8A9112228969D009DEE0F /* Spikes.swift */,
@@ -210,6 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8764E5552260F2EC0068D5D8 /* GravityWell.swift in Sources */,
 				96F8A903222895EB009DEE0F /* World.swift in Sources */,
 				96F8A9202228A4CD009DEE0F /* DeathWallEffects.swift in Sources */,
 				96F8A90F22289659009DEE0F /* Well.swift in Sources */,

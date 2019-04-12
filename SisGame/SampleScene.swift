@@ -22,6 +22,7 @@ struct PhysicsCategory {
     static let Field: UInt32 = 0b10000      // 16
     static let Brick: UInt32 = 0b100000      // 32
     static let Enemy: UInt32 = 0b1000000      // 64
+    static let GravityWell: UInt32 = 0b10000000      // 128
 }
 
 //SKScenes are the "view" equivalant for sprite kit.
@@ -94,12 +95,14 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         
         // Initialization of base contactables
         let coin = CoinBrick(position:CGPoint(x: ball.position.x+200, y: ball.position.y+200), isCoin: true)
-        let brick = CoinBrick(position:CGPoint(x: ball.position.x+200, y: ball.position.y-200),isCoin: false)
+        
+        let gravityWell = GravityWell(position: CGPoint(x: ball.position.x+200, y: ball.position.y-200), isOn: true)
         
         let enemyStartPoint = CGPoint(x: ball.position.x+100, y: ball.position.y+100)
+        
         let enemy = Enemy(typeOfEnemy: Enemy.TypeOfEnemy.basic,position:enemyStartPoint, isOn: true)
         // A temporary array to store our default contactables
-        let tempContactables : [Contactable] = [coin, brick, enemy]
+        let tempContactables : [Contactable] = [coin, gravityWell, enemy]
         // Adding our temporary array to our list of all contactables
         currentContactables.append(tempContactables)
 
@@ -396,6 +399,14 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
             (secondBody.categoryBitMask & PhysicsCategory.Brick != 0)) {
             // ...the ball bounces off; no further logic yet
 //            print("The ball came into contact with a brick")
+        }
+
+        
+        // If the ball comes in contact with a Gravity Well...
+        if ((firstBody.categoryBitMask & PhysicsCategory.Ball != 0) &&
+            (secondBody.categoryBitMask & PhysicsCategory.GravityWell != 0)) {
+            // ...the ball bounces off; no further logic yet
+
         }
         
         // If the ball comes in contact with an enemy...
