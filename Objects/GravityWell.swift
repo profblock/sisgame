@@ -13,19 +13,23 @@ import SpriteKit
 class GravityWell: Contactable {
     
     var isOn: Bool!
+    let gravityPullField = SKFieldNode.radialGravityField()
+    let gravityPushField = SKFieldNode.radialGravityField()
     
     init(position:CGPoint, isOn : Bool){
         
         self.isOn = isOn
         
-        //Dimensions for texture
         let color = UIColor.clear
-        //Eventually, enimies will need different sizes but for now the same size.
+        //Dimensions for texture
         let size = CGSize(width: 50.0,height: 50.0)
-        
+
         let texture:SKTexture
-        
         texture = isOn ? SKTexture(imageNamed: "Enemy") : SKTexture(imageNamed: "EnemyOff")
+        
+       
+        
+        
         super.init(texture: texture, color: color, size: size)
         
         //We are going to need the texture to be bigger than the physics body
@@ -41,20 +45,37 @@ class GravityWell: Contactable {
         
         // Setting texture and physicsBody according to whether or
         // not this Enemy starts as "on"
+        
+        
+        gravityPullField.strength = 7
+        gravityPullField.region = SKRegion(radius: 800)
+        gravityPullField.falloff = 1
+        
+        gravityPushField.strength = -7
+        gravityPushField.region = SKRegion(radius: 800)
+        gravityPushField.falloff = 1
+        
         if isOn {
-            //self.physicsBody?.categoryBitMask = PhysicsCategory.Enemy
+            self.addChild(gravityPullField)
         } else {
-            //self.physicsBody?.categoryBitMask = PhysicsCategory.None
+            self.addChild(gravityPushField)
         }
         
         self.position = position
-        
-        let shield = SKFieldNode.radialGravityField()
-        shield.strength = 5
-        shield.region = SKRegion(radius: 100)
-        shield.falloff = 4
-        self.addChild(shield)
-        
+    }
+    
+    override func toggle() {
+        isOn.toggle()
+        if isOn {
+            self.texture = SKTexture(imageNamed: "Enemy")
+            gravityPushField.removeFromParent()
+            self.addChild(gravityPullField)
+            
+        } else {
+            self.texture = SKTexture(imageNamed: "EnemyOff")
+            gravityPullField.removeFromParent()
+            self.addChild(gravityPushField)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
