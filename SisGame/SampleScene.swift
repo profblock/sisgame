@@ -9,8 +9,6 @@
 import UIKit
 import SpriteKit
 
-//2. Statically Populate array of contactables
-//3. Dynamically Populate array of contatables
 //4. Add new array of contaacbles with new segment
 //5. remove old array of contacables with old segment.
 
