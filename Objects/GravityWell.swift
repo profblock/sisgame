@@ -25,7 +25,7 @@ class GravityWell: Contactable {
         let size = CGSize(width: 50.0,height: 50.0)
 
         let texture:SKTexture
-        texture = isOn ? SKTexture(imageNamed: "Enemy") : SKTexture(imageNamed: "EnemyOff")
+        texture = isOn ? SKTexture(imageNamed: "pullHole") : SKTexture(imageNamed: "pushHole")
         
        
         
@@ -67,12 +67,12 @@ class GravityWell: Contactable {
     override func toggle() {
         isOn.toggle()
         if isOn {
-            self.texture = SKTexture(imageNamed: "Enemy")
+            self.texture = SKTexture(imageNamed: "pullHole")
             gravityPushField.removeFromParent()
             self.addChild(gravityPullField)
             
         } else {
-            self.texture = SKTexture(imageNamed: "EnemyOff")
+            self.texture = SKTexture(imageNamed: "pushHole")
             gravityPullField.removeFromParent()
             self.addChild(gravityPushField)
         }
