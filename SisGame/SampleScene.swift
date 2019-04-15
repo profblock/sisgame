@@ -151,18 +151,24 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
                 let percentage = Int.random(in: 0 ... 100)
                 // Will hold the new contactable momentarily
                 let contactable : Contactable
-                if percentage <= 25 {
-                    // 25% chance of making a coin
+                if percentage <= 16 {
+                    // 16% chance of making a coin
                     contactable = CoinBrick(position: contactablePoint, isCoin: true)
-                } else if percentage > 25 && percentage <= 50 {
-                    // 25% chance of making a brick
+                } else if percentage > 16 && percentage <= 32 {
+                    // 16% chance of making a brick
                     contactable = CoinBrick(position: contactablePoint, isCoin: false)
-                } else if percentage > 50 && percentage <= 75 {
-                    // 25% chance of making an Enemy who starts on
+                } else if percentage > 32 && percentage <= 48 {
+                    // 16% chance of making an Enemy who starts on
                     contactable = Enemy(typeOfEnemy: .basic, position: contactablePoint, isOn: true)
-                } else {
-                    // 25% chance of making an Enemy who starts off
+                } else if percentage > 48 && percentage <= 65 {
+                    // 17% chance of making an Enemy who starts off
                     contactable = Enemy(typeOfEnemy: .basic, position: contactablePoint, isOn: false)
+                } else if percentage > 65 && percentage <= 82 {
+                    // 17% chance of making a Gravity Well that starts on
+                    contactable = GravityWell(position: contactablePoint, isOn: true)
+                } else {
+                    // 18% chance of making a Gravity Well that starts off
+                    contactable = GravityWell(position: contactablePoint, isOn: false)
                 }
                 // Adds the new contactable to our list of contactables for this area
                 tempConctactables.append(contactable)
