@@ -16,7 +16,7 @@ class Boundary: SKShapeNode{
     var segmentCount = 0;
     let lengthOfSpline = 100; //Changed to smaller value for testing
     var prevFinalPoint: CGPoint?
-    let arrayMaxSize: Int = 6
+    let arrayMaxSize: Int = 9
     var splineTracker: [SKShapeNode]?
     
     
@@ -34,8 +34,9 @@ class Boundary: SKShapeNode{
     func addSegment() ->([CGPoint], [CGPoint]) {
         // Removes old splines from scene and memory
         // if we reach 3 splines on-screen
+
         if splineTracker?.count == arrayMaxSize {
-            for i in 0...1 {
+            for i in 0...2 {
                 splineTracker![i].removeFromParent()
                 splineTracker?.remove(at: i)
             }
@@ -66,10 +67,35 @@ class Boundary: SKShapeNode{
         ceiling.physicsBody?.categoryBitMask = PhysicsCategory.Ground
         
         
+        var backwardsCeilingSplinePoints = ceilingSplinePoints.reversed()
+        
+        var semiBackgroundSplines = [CGPoint]()
+        semiBackgroundSplines.append(contentsOf: floorSplinePoints)
+        let lastFloorSplinePoint = floorSplinePoints.last!
+        let nextFloorSplinePoint = CGPoint(x: lastFloorSplinePoint.x + 50.0, y: lastFloorSplinePoint.y + 50.0)
+        let oneMoreFloorSplinePoint = CGPoint(x: nextFloorSplinePoint.x + 50.0, y: nextFloorSplinePoint.y + 50.0)
+        semiBackgroundSplines.append(nextFloorSplinePoint)
+        semiBackgroundSplines.append(oneMoreFloorSplinePoint)
+        
+        let firstCeilingBWPoint = backwardsCeilingSplinePoints.first!
+        let secondToFirstBWCeiling = CGPoint(x: firstCeilingBWPoint.x + 50.0, y: firstCeilingBWPoint.y - 50.0)
+        let firstBWCeiling = CGPoint(x: secondToFirstBWCeiling.x + 50.0, y: secondToFirstBWCeiling.y - 50.0)
+        
+        semiBackgroundSplines.append(firstBWCeiling)
+        semiBackgroundSplines.append(secondToFirstBWCeiling)
+        semiBackgroundSplines.append(contentsOf: backwardsCeilingSplinePoints)
+        
+        var semiBackground = SKShapeNode(splinePoints: &semiBackgroundSplines, count: semiBackgroundSplines.count)
+        semiBackground.strokeColor = UIColor.blue
+        semiBackground.fillColor = UIColor.black
+        
         self.addChild(ceiling)
         self.addChild(floor)
+        self.addChild(semiBackground)
         splineTracker?.append(ceiling)
         splineTracker?.append(floor)
+        splineTracker?.append(semiBackground)
+        
 
         return (floorSplinePoints, ceilingSplinePoints)
         
