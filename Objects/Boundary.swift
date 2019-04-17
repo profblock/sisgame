@@ -67,25 +67,33 @@ class Boundary: SKShapeNode{
         ceiling.physicsBody?.categoryBitMask = PhysicsCategory.Ground
         
         
-        var backwardsCeilingSplinePoints = ceilingSplinePoints.reversed()
+        let backwardsCeilingSplinePoints = ceilingSplinePoints.reversed()
         
         var semiBackgroundSplines = [CGPoint]()
         semiBackgroundSplines.append(contentsOf: floorSplinePoints)
         let lastFloorSplinePoint = floorSplinePoints.last!
-        let nextFloorSplinePoint = CGPoint(x: lastFloorSplinePoint.x + 50.0, y: lastFloorSplinePoint.y + 50.0)
-        let oneMoreFloorSplinePoint = CGPoint(x: nextFloorSplinePoint.x + 50.0, y: nextFloorSplinePoint.y + 50.0)
-        semiBackgroundSplines.append(nextFloorSplinePoint)
-        semiBackgroundSplines.append(oneMoreFloorSplinePoint)
+        let newFloorPoint = lastFloorSplinePoint
+        for _ in 0...5 {
+            semiBackgroundSplines.append(newFloorPoint)
+        }
+//        let nextFloorSplinePoint = CGPoint(x: lastFloorSplinePoint.x + 0.0, y: lastFloorSplinePoint.y + 0.0)
+//        let oneMoreFloorSplinePoint = CGPoint(x: nextFloorSplinePoint.x + 0.0, y: nextFloorSplinePoint.y + 0.0)
+//        semiBackgroundSplines.append(nextFloorSplinePoint)
+//        semiBackgroundSplines.append(oneMoreFloorSplinePoint)
         
         let firstCeilingBWPoint = backwardsCeilingSplinePoints.first!
-        let secondToFirstBWCeiling = CGPoint(x: firstCeilingBWPoint.x + 50.0, y: firstCeilingBWPoint.y - 50.0)
-        let firstBWCeiling = CGPoint(x: secondToFirstBWCeiling.x + 50.0, y: secondToFirstBWCeiling.y - 50.0)
-        
-        semiBackgroundSplines.append(firstBWCeiling)
-        semiBackgroundSplines.append(secondToFirstBWCeiling)
+        let newCeilPoint = firstCeilingBWPoint
+        for _ in 0...5 {
+            semiBackgroundSplines.append(newCeilPoint)
+        }
+//        let secondToFirstBWCeiling = CGPoint(x: firstCeilingBWPoint.x + 0.0, y: firstCeilingBWPoint.y - 0.0)
+//        let firstBWCeiling = CGPoint(x: secondToFirstBWCeiling.x + 0.0, y: secondToFirstBWCeiling.y - 0.0)
+//
+//        semiBackgroundSplines.append(firstBWCeiling)
+//        semiBackgroundSplines.append(secondToFirstBWCeiling)
         semiBackgroundSplines.append(contentsOf: backwardsCeilingSplinePoints)
         
-        var semiBackground = SKShapeNode(splinePoints: &semiBackgroundSplines, count: semiBackgroundSplines.count)
+        let semiBackground = SKShapeNode(splinePoints: &semiBackgroundSplines, count: semiBackgroundSplines.count)
         semiBackground.strokeColor = UIColor.blue
         semiBackground.fillColor = UIColor.black
         
