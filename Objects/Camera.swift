@@ -66,17 +66,17 @@ class Camera: SKCameraNode{
     }
     
     func trackBall(ball: Player){
-        //Trying something here that should smooth out the camera motion
-        //move camera using lerp
-        //http://www.learn-to-code-london.co.uk/blog/2016/04/smoother-camera-motion-in-spritekit-using-lerp/
-        //TODO: Update constants with real values
+//        //Trying something here that should smooth out the camera motion
+//        //move camera using lerp
+//        //http://www.learn-to-code-london.co.uk/blog/2016/04/smoother-camera-motion-in-spritekit-using-lerp/
+//        //TODO: Update constants with real values
         let currentPosition = ball.position
-        
+//
         let x = (weightedFactor(previous: previousPosition.x, current: currentPosition.x, currentWeight: 0.03) + 200)
         let y = (weightedFactor(previous: previousPosition.y, current: currentPosition.y, currentWeight: 0.03) + 75)
         previousPosition = currentPosition;
-        
-        self.run(SKAction.move(to: CGPoint(x: x, y: y), duration: 0.01))
+//
+        self.position = CGPoint(x: x, y: y)
     }
     
     func weightedFactor(previous: CGFloat, current:CGFloat, currentWeight:CGFloat)->CGFloat{
