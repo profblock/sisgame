@@ -53,8 +53,8 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
     
 
 
-    private var par1:ParallaxBackground?
-    private var par2:ParallaxBackground?
+//    private var par1:ParallaxBackground?
+//    private var par2:ParallaxBackground?
     
     // Time of last frame
     private var lastFrameTime : TimeInterval = 0
@@ -76,8 +76,8 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         ball = Player()
         staminaBar = StaminaBar(stamina: ball.stamina)
         
-        par1 = ParallaxBackground(spriteName: "Parallax-Diamonds-1", gameScene: self, heightOffset: 0, zPosition: -1)
-        par2 = ParallaxBackground(spriteName: "Parallax-Diamonds-2", gameScene: self, heightOffset: 0, zPosition: -2)
+//        par1 = ParallaxBackground(spriteName: "Parallax-Diamonds-1", gameScene: self, heightOffset: 0, zPosition: -1)
+//        par2 = ParallaxBackground(spriteName: "Parallax-Diamonds-2", gameScene: self, heightOffset: 0, zPosition: -2)
 //        self.addChild(par1!.sprite!)
 //        self.addChild(par1!.spriteNext!)
 //        self.addChild(par2!.sprite!)
@@ -200,12 +200,12 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         self.deathWall!.moveWall(currentPositionOfPlayer: ball.position)
         // Updating score label in UI
         self.myCamera.updateScore(score: score!)
-        par1?.updateCamera(camera: self.myCamera)
+//        par1?.updateCamera(camera: self.myCamera)
         
         // Creates new segments and contactables whenever the player reaches the end of current spline
-        if(ball.position.x >= ground!.prevFinalPoint!.x - (self.view!.bounds.maxX * 2.0)) {
-             generateSegment()
-        }
+//        if(ball.position.x >= ground!.prevFinalPoint!.x - (self.view!.bounds.maxX * 2.0)) {
+//             generateSegment()
+//        }
     }
     
     
@@ -363,7 +363,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         deltaTime = currentTime - lastFrameTime
         
         // Moving the parallax background with a scaling factor based on player's velocity
-        par1?.move(scene: self, speed: (ball.physicsBody!.velocity.dx * 0.0001), deltaTime: deltaTime)
+//        par1?.move(scene: self, speed: (ball.physicsBody!.velocity.dx * 0.0001), deltaTime: deltaTime)
 
         
         // Updating score value, based on distance travelled and scaling factor
