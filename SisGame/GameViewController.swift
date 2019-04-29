@@ -18,7 +18,7 @@ class GameViewController: UIViewController {
         if let view = self.view as! SKView? {
             let scene = SampleScene(size: view.bounds.size)
             scene.scaleMode = .aspectFill
-            scene.backgroundColor = UIColor.green
+            scene.backgroundColor = UIColor.black
             view.presentScene(scene)
             
             view.ignoresSiblingOrder = true

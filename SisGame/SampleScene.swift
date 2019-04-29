@@ -121,7 +121,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
             return
         }
         // Retrieving new floor and ceiling splines for reference
-        let (floorSplinePoints, ceilingSplinePoints) = ground.addSegment()
+        let floorSplinePoints = ground.addSegment()
         
         // Skip helps us randomly determine where to add contactables
         var skip = Int.random(in: 1...10)
@@ -129,16 +129,16 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         // Initializing an array for new contactables in this area
         var tempConctactables = [Contactable]()
         
-        for index in 0..<floorSplinePoints.count {
+        for index in 0 ..< floorSplinePoints.count {
             // Creating helper variables for current points on floor and ceiling
             let floorPoint = floorSplinePoints[index]
-            let ceilingPoint = ceilingSplinePoints[index]
             // If skip has reached 0, we add a contactable at this location
             if skip <= 0 {
                 // Setting variables to help us determine random distances between floor and ceiling points,
                 // making some random noise in the x-axis, and a percentage to determine which contactable to make
                 let yBufferDistance = CGFloat(25)
-                let randomY = CGFloat.random(in: (floorPoint.y + yBufferDistance)  ..< (ceilingPoint.y - yBufferDistance))
+                let yMaxAwayDistance = CGFloat(500)
+                let randomY = CGFloat.random(in: (floorPoint.y + yBufferDistance)  ..< floorPoint.y + yMaxAwayDistance)
                 let xRange = CGFloat(10.0)
                 let randomX  = CGFloat.random(in: (floorPoint.x - xRange) ..< (floorPoint.x + xRange) )
                 let contactablePoint = CGPoint(x: randomX, y: randomY)
