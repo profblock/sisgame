@@ -76,12 +76,6 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         ball = Player()
         staminaBar = StaminaBar(stamina: ball.stamina)
         
-//        par1 = ParallaxBackground(spriteName: "Parallax-Diamonds-1", gameScene: self, heightOffset: 0, zPosition: -1)
-//        par2 = ParallaxBackground(spriteName: "Parallax-Diamonds-2", gameScene: self, heightOffset: 0, zPosition: -2)
-//        self.addChild(par1!.sprite!)
-//        self.addChild(par1!.spriteNext!)
-//        self.addChild(par2!.sprite!)
-//        self.addChild(par2!.spriteNext!)
 
         ground = Boundary()
         deathWall = Wall(startX: -300.0, color: .red, doesKill: true)
@@ -203,9 +197,9 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
 //        par1?.updateCamera(camera: self.myCamera)
         
         // Creates new segments and contactables whenever the player reaches the end of current spline
-//        if(ball.position.x >= ground!.prevFinalPoint!.x - (self.view!.bounds.maxX * 2.0)) {
-//             generateSegment()
-//        }
+        if(ball.position.x >= ground!.prevFinalPoint!.x - (self.view!.bounds.maxX * 2.0)) {
+             generateSegment()
+        }
     }
     
     

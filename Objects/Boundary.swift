@@ -14,7 +14,7 @@ class Boundary: SKShapeNode{
     // TODO: Generate next segment of floor and ceiling
     
     var segmentCount = 0;
-    let lengthOfSpline = 100; //Changed to smaller value for testing
+    let lengthOfSpline = 50; //Changed to smaller value for testing
     var prevFinalPoint: CGPoint?
     let arrayMaxSize: Int = 9
     var splineTracker: [SKShapeNode]?
@@ -110,10 +110,10 @@ class Boundary: SKShapeNode{
     }
     
     func createFloorSpline(startPoint:CGPoint, numberOfPoints:Int)->[CGPoint]{
-        let horizMin = 40
-        let horizMax = 100
+        let horizMin = 400
+        let horizMax = 500
         let vertMin = -2
-        let vertMax = 50
+        let vertMax = 200
         let connectDistance: CGFloat = 200 // Even looks good at 100
         
         var splinePoints = [CGPoint]()
@@ -152,8 +152,8 @@ class Boundary: SKShapeNode{
     func createCeilingSpline(floorPoints:[CGPoint])->[CGPoint]{
         let horizMin = -10 // Should be related to the min spacing above.
         let horizMax = 20
-        let vertMin = 400
-        let vertMax = 500
+        let vertMin = 500
+        let vertMax = 600
         
         var splinePoints = [CGPoint]()
         
