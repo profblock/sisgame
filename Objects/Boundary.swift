@@ -14,7 +14,7 @@ class Boundary: SKShapeNode{
     // TODO: Generate next segment of floor and ceiling
     
     var segmentCount = 0;
-    let lengthOfSpline = 50; //Changed to smaller value for testing
+    let lengthOfSpline = 25; //Changed to smaller value for testing
     var prevFinalPoint: CGPoint?
     let arrayMaxSize: Int = 9
     var splineTracker: [SKShapeNode]?
