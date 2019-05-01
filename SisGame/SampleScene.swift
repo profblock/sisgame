@@ -410,7 +410,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
             if let player = firstBody.node as? Player, let
                 coin = secondBody.node as? CoinBrick {
                 // Adds a fourth of total stamina to current stamina, or just puts us at max, whichever is less
-                player.stamina = CGFloat.minimum(player.maxStamina, player.stamina + (player.maxStamina/4))
+                player.stamina = player.maxStamina
                 coin.removeFromParent()
                 return // No need for more collision checks if we accomplished our goal
             }
@@ -419,6 +419,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         // If the ball comes in contact with a brick...
         if ((firstBody.categoryBitMask & PhysicsCategory.Ball != 0) &&
             (secondBody.categoryBitMask & PhysicsCategory.Brick != 0)) {
+            isRegeneratingStamina = false
             // ...the ball bounces off; no further logic yet
 //            print("The ball came into contact with a brick")
         }
@@ -427,6 +428,15 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         // If the ball comes in contact with a Gravity Well...
         if ((firstBody.categoryBitMask & PhysicsCategory.Ball != 0) &&
             (secondBody.categoryBitMask & PhysicsCategory.GravityWell != 0)) {
+            if let player = firstBody.node as? Player,
+                let gravityWell = secondBody.node as? GravityWell {
+                if gravityWell.isOn {
+                    isRegeneratingStamina = false
+                    player.stamina = CGFloat.maximum(0.0, player.stamina - (player.maxStamina/4))
+                
+                }
+            }
+            
             // ...the ball bounces off; no further logic yet
 
         }
@@ -439,6 +449,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
             if let player = firstBody.node as? Player, let
                 _ = secondBody.node as? Contactable {
                 // Subtracts a fourth of total stamina to current stamina, or just puts us at 0, whichever is greater
+                isRegeneratingStamina = false
                 player.stamina = CGFloat.maximum(0.0, player.stamina - (player.maxStamina/4))
                 return
             }

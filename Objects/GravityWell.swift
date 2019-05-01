@@ -22,8 +22,8 @@ class GravityWell: Contactable {
         
         let color = UIColor.clear
         //Dimensions for texture
-        let sizeOfCenterAt200TextureWidth = CGFloat(50)
-        let size = CGSize(width: 200.0,height: 200.0)
+        let sizeOfCenterTextureWidth = CGFloat(25)
+        let size = CGSize(width: 500.0,height: 500.0)
 
         let texture:SKTexture
         texture = isOn ? SKTexture(imageNamed: "pullHole") : SKTexture(imageNamed: "pushHole")
@@ -35,7 +35,7 @@ class GravityWell: Contactable {
         
         //We are going to need the texture to be bigger than the physics body
         
-        self.physicsBody = SKPhysicsBody(circleOfRadius: sizeOfCenterAt200TextureWidth)
+        self.physicsBody = SKPhysicsBody(circleOfRadius: sizeOfCenterTextureWidth)
         self.physicsBody?.isDynamic = false
         self.physicsBody?.categoryBitMask = PhysicsCategory.GravityWell
         self.physicsBody?.contactTestBitMask = PhysicsCategory.Ball
@@ -50,12 +50,12 @@ class GravityWell: Contactable {
         
         
         gravityPullField.strength = 15
-        gravityPullField.region = SKRegion(radius: 400)
-        gravityPullField.falloff = 0
+        gravityPullField.region = SKRegion(radius: 0)
+        gravityPullField.falloff = 2
         
         gravityPushField.strength = -15
-        gravityPushField.region = SKRegion(radius: 400)
-        gravityPushField.falloff = 0
+        gravityPushField.region = SKRegion(radius: 0)
+        gravityPushField.falloff = 2
         
         if isOn {
             self.addChild(gravityPullField)
