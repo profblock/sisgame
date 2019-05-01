@@ -116,6 +116,8 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         myCamera.addChild(staminaBar)
         staminaBar.initHelper()
         launcher = Launcher(mainNode: myCamera)
+        let backgroundSound = SKAudioNode(fileNamed: "SisGame-Theme01.mp3")
+        self.addChild(backgroundSound)
         
     }
     
