@@ -53,6 +53,7 @@ class Boundary: SKShapeNode{
         floor.physicsBody?.isDynamic = false
         floor.physicsBody?.friction = 1.0
         floor.physicsBody?.categoryBitMask = PhysicsCategory.Ground
+        floor.physicsBody?.contactTestBitMask = PhysicsCategory.Ball
         
 //        var ceilingSplinePoints = createCeilingSpline(floorPoints: floorSplinePoints)
 //        let ceiling = SKShapeNode(splinePoints: &ceilingSplinePoints, count: lengthOfSpline)

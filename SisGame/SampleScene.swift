@@ -51,6 +51,10 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
     private let noGravity = CGVector(dx: 0, dy: 0)
     private var oldSpeed = CGVector.zero
     
+    private var isRegeneratingStamina = true
+    private var isAboutToStopRegenerating = false
+    
+    
 
 
 //    private var par1:ParallaxBackground?
@@ -304,6 +308,9 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
                 let endPoint = touch.location(in: self.myCamera)
                 // Performs the launching impulse upon the ball's physicsBody
                 ball.launchBall(startPoint: startPoint, endPoint: endPoint)
+                isRegeneratingStamina = false
+                isAboutToStopRegenerating = true
+
 
             }
             
@@ -314,6 +321,10 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
     override func didSimulatePhysics() {
         // Keeping the camera focused on the ball
         myCamera.trackBall(ball: ball)
+        if isAboutToStopRegenerating{
+            isRegeneratingStamina = false
+            isAboutToStopRegenerating = false
+        }
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -323,7 +334,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         if (isLauncherOnScreen == false){
             // ...then the ball is just rolling, so we
             // increase stamina, as long as it's not full
-            if(ball.stamina < ball.maxStamina){
+            if(ball.stamina < ball.maxStamina && isRegeneratingStamina){
                 ball.stamina += staminaIncreaseRate
             }
         } else {
@@ -378,6 +389,13 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         } else {
             firstBody = contact.bodyB
             secondBody = contact.bodyA
+        }
+        
+        // If the ball comes in contact with a coin...
+        if ((firstBody.categoryBitMask & PhysicsCategory.Ball != 0) &&
+            (secondBody.categoryBitMask & PhysicsCategory.Ground != 0)) {
+            isRegeneratingStamina = true
+            return // No need for more collision checks if we accomplished our goal
         }
         
         // If the ball comes in contact with a coin...
