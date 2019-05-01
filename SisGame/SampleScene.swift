@@ -74,6 +74,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
     
     //didMove is the method that is called when the system is loaded.
     override func didMove(to view: SKView) {
+        print("HEGH")
         
         physicsWorld.contactDelegate = self
         score = 0
