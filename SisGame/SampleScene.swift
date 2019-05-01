@@ -130,7 +130,8 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         let floorSplinePoints = ground.addSegment()
         
         // Skip helps us randomly determine where to add contactables
-        var skip = Int.random(in: 1...10)
+        let skipMax = 1
+        var skip = Int.random(in: 1...skipMax)
         
         // Initializing an array for new contactables in this area
         var tempConctactables = [Contactable]()
@@ -175,7 +176,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
                 // Adds the new contactable to the scene itself
                 self.addChild(contactable)
                 // Reinitializes our random number for the next contactable
-                skip = Int.random(in: 1...10)
+                skip = Int.random(in: 1...skipMax)
             } else {
                 // If skip is not yet at 0, we subtract 1 to get closer to a new contactable
                 skip -= 1
