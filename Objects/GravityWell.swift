@@ -22,7 +22,8 @@ class GravityWell: Contactable {
         
         let color = UIColor.clear
         //Dimensions for texture
-        let size = CGSize(width: 50.0,height: 50.0)
+        let sizeOfCenterAt200TextureWidth = CGFloat(50)
+        let size = CGSize(width: 200.0,height: 200.0)
 
         let texture:SKTexture
         texture = isOn ? SKTexture(imageNamed: "pullHole") : SKTexture(imageNamed: "pushHole")
@@ -33,7 +34,8 @@ class GravityWell: Contactable {
         super.init(texture: texture, color: color, size: size)
         
         //We are going to need the texture to be bigger than the physics body
-        self.physicsBody = SKPhysicsBody(texture: self.texture!, size: self.size)
+        
+        self.physicsBody = SKPhysicsBody(circleOfRadius: sizeOfCenterAt200TextureWidth)
         self.physicsBody?.isDynamic = false
         self.physicsBody?.categoryBitMask = PhysicsCategory.GravityWell
         self.physicsBody?.contactTestBitMask = PhysicsCategory.Ball
@@ -47,13 +49,13 @@ class GravityWell: Contactable {
         // not this Enemy starts as "on"
         
         
-        gravityPullField.strength = 7
-        gravityPullField.region = SKRegion(radius: 800)
-        gravityPullField.falloff = 1
+        gravityPullField.strength = 15
+        gravityPullField.region = SKRegion(radius: 400)
+        gravityPullField.falloff = 0
         
-        gravityPushField.strength = -7
-        gravityPushField.region = SKRegion(radius: 800)
-        gravityPushField.falloff = 1
+        gravityPushField.strength = -15
+        gravityPushField.region = SKRegion(radius: 400)
+        gravityPushField.falloff = 0
         
         if isOn {
             self.addChild(gravityPullField)
