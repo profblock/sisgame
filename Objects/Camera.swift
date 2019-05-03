@@ -15,7 +15,7 @@ class Camera: SKCameraNode{
     var previousPosition: CGPoint!
     var leftScreen: SKShapeNode!
     var rightScreen: SKShapeNode!
-    var pauseButton: SKShapeNode!
+    var pauseButton: SKSpriteNode!
     var scoreLabel: SKLabelNode!
     
     override init() {
@@ -25,7 +25,7 @@ class Camera: SKCameraNode{
         
         leftScreen = SKShapeNode()
         rightScreen = SKShapeNode()
-        pauseButton = SKShapeNode()
+        pauseButton = SKSpriteNode()
         scoreLabel = SKLabelNode()
     }
     
@@ -47,10 +47,13 @@ class Camera: SKCameraNode{
         rightScreen.position = CGPoint(x: 1, y: -(screenRegionYBound/2))
         self.addChild(rightScreen)
         
-        pauseButton = SKShapeNode(rect: CGRect(x: 0, y: 0, width: 30, height: 30))
-        pauseButton.fillColor = .purple
-        pauseButton.lineWidth = 0
-        pauseButton.position = CGPoint(x: -(screenRegionXBound/2) + 20, y: (screenRegionYBound/2) - 40)
+        let pauseTexture = SKTexture(imageNamed: "Pause")
+        pauseButton = SKSpriteNode(texture: pauseTexture, color: .clear, size: CGSize(width: 30, height: 30))
+        pauseButton.alpha = 0.7
+//            SKShapeNode(rect: CGRect(x: 0, y: 0, width: 30, height: 30))
+//        pauseButton.fillColor = .purple
+//        pauseButton.lineWidth = 0
+        pauseButton.position = CGPoint(x: -(screenRegionXBound/2) + 20, y: (screenRegionYBound/2) - 20)
         self.addChild(pauseButton)
         
         scoreLabel = SKLabelNode(text: " - Score")
@@ -102,6 +105,14 @@ class Camera: SKCameraNode{
         // Removes the decimal from final score
         let simpleScore: Int = Int(score)
         scoreLabel.text = "\(simpleScore) - Score"
+    }
+    
+    func togglePauseTexture(isPaused: Bool) {
+        if isPaused {
+            pauseButton.texture = SKTexture(imageNamed: "Play")
+        } else {
+            pauseButton.texture = SKTexture(imageNamed: "Pause")
+        }
     }
     
     

@@ -220,6 +220,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
             if(myCamera.pauseButton.contains(touch.location(in: self.myCamera))){
 
                 isPaused.toggle()
+                myCamera.togglePauseTexture(isPaused: isPaused)
                 return
                 // Pressing the left side of the screen is for launching
             } else if(myCamera.leftScreen.contains(touch.location(in: self.myCamera))){
