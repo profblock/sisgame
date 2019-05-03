@@ -144,38 +144,44 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
             if skip <= 0 {
                 // Setting variables to help us determine random distances between floor and ceiling points,
                 // making some random noise in the x-axis, and a percentage to determine which contactable to make
-                let yBufferDistance = CGFloat(25)
-                let yMaxAwayDistance = CGFloat(500)
-                let randomY = CGFloat.random(in: (floorPoint.y + yBufferDistance)  ..< floorPoint.y + yMaxAwayDistance)
-                let xRange = CGFloat(10.0)
-                let randomX  = CGFloat.random(in: (floorPoint.x - xRange) ..< (floorPoint.x + xRange) )
-                let contactablePoint = CGPoint(x: randomX, y: randomY)
-                let percentage = Int.random(in: 0 ... 100)
-                // Will hold the new contactable momentarily
-                let contactable : Contactable
-                if percentage <= 16 {
-                    // 16% chance of making a coin
-                    contactable = CoinBrick(position: contactablePoint, isCoin: true)
-                } else if percentage > 16 && percentage <= 32 {
-                    // 16% chance of making a brick
-                    contactable = CoinBrick(position: contactablePoint, isCoin: false)
-                } else if percentage > 32 && percentage <= 48 {
-                    // 16% chance of making an Enemy who starts on
-                    contactable = Enemy(typeOfEnemy: .basic, position: contactablePoint, isOn: true)
-                } else if percentage > 48 && percentage <= 65 {
-                    // 17% chance of making an Enemy who starts off
-                    contactable = Enemy(typeOfEnemy: .basic, position: contactablePoint, isOn: false)
-                } else if percentage > 65 && percentage <= 82 {
-                    // 17% chance of making a Gravity Well that starts on
-                    contactable = GravityWell(position: contactablePoint, isOn: true)
-                } else {
-                    // 18% chance of making a Gravity Well that starts off
-                    contactable = GravityWell(position: contactablePoint, isOn: false)
+                let maxMonstersPerPoint = 4
+                let numberMosnters = Int.random(in: 0...maxMonstersPerPoint)
+                
+                for otherIndex in 0 ..< numberMosnters {
+                    let yBufferDistance = CGFloat(25)
+                    let yMaxAwayDistance = CGFloat(1000)
+                    let randomY = CGFloat.random(in: (floorPoint.y + yBufferDistance)  ..< floorPoint.y + yMaxAwayDistance)
+                    let xRange = CGFloat(800.0)
+                    let randomX  = CGFloat.random(in: (floorPoint.x - xRange) ..< (floorPoint.x + xRange) )
+                    let contactablePoint = CGPoint(x: randomX, y: randomY)
+                    let percentage = Int.random(in: 0 ... 100)
+                    // Will hold the new contactable momentarily
+                    let contactable : Contactable
+                    if percentage <= 16 {
+                        // 16% chance of making a coin
+                        contactable = CoinBrick(position: contactablePoint, isCoin: true)
+                    } else if percentage > 16 && percentage <= 32 {
+                        // 16% chance of making a brick
+                        contactable = CoinBrick(position: contactablePoint, isCoin: false)
+                    } else if percentage > 32 && percentage <= 48 {
+                        // 16% chance of making an Enemy who starts on
+                        contactable = Enemy(typeOfEnemy: .basic, position: contactablePoint, isOn: true)
+                    } else if percentage > 48 && percentage <= 65 {
+                        // 17% chance of making an Enemy who starts off
+                        contactable = Enemy(typeOfEnemy: .basic, position: contactablePoint, isOn: false)
+                    } else if percentage > 65 && percentage <= 82 {
+                        // 17% chance of making a Gravity Well that starts on
+                        contactable = GravityWell(position: contactablePoint, isOn: true)
+                    } else {
+                        // 18% chance of making a Gravity Well that starts off
+                        contactable = GravityWell(position: contactablePoint, isOn: false)
+                    }
+                    // Adds the new contactable to our list of contactables for this area
+                    tempConctactables.append(contactable)
+                    // Adds the new contactable to the scene itself
+                    self.addChild(contactable)
                 }
-                // Adds the new contactable to our list of contactables for this area
-                tempConctactables.append(contactable)
-                // Adds the new contactable to the scene itself
-                self.addChild(contactable)
+                
                 // Reinitializes our random number for the next contactable
                 skip = Int.random(in: 1...skipMax)
             } else {
