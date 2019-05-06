@@ -21,7 +21,7 @@ class Player:Interactive{
     
     convenience init() {
         // convenience constructer
-        let texture = SKTexture(imageNamed: "sface.png")
+        let texture = SKTexture(imageNamed: "Player")
         self.init(texture: texture, color: .white, size: CGSize(width: 40, height: 40))
     }
     
