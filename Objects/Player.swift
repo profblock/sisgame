@@ -12,9 +12,6 @@ import UIKit
 
 
 class Player:Interactive{
-    // TODO: Stamina
-    
-    
     var maxStamina: CGFloat = 100
     var stamina: CGFloat
     var distanceTravelled: CGFloat = 0
@@ -76,7 +73,6 @@ class Player:Interactive{
     
     
     func launchBall(startPoint:CGPoint, endPoint:CGPoint){
-        // TODO: launchBall
         
         let projectedStamina = Player.projectedStamina(startPoint: startPoint, endPoint: endPoint)
         
