@@ -91,9 +91,7 @@ class Player:Interactive{
             self.physicsBody?.applyImpulse(charge)
             self.stamina -= projectedStamina
         }
-//        else {
-//            debugPrint("DEBUG: We should never be in this situation")
-//        }
+
         
     }
     
