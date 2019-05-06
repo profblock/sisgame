@@ -90,9 +90,10 @@ class Player:Interactive{
             let charge = CGVector(dx: newDX, dy: newDY)
             self.physicsBody?.applyImpulse(charge)
             self.stamina -= projectedStamina
-        } else {
-            debugPrint("DEBUG: We should never be in this situation")
         }
+//        else {
+//            debugPrint("DEBUG: We should never be in this situation")
+//        }
         
     }
     

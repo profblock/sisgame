@@ -74,7 +74,6 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
     
     //didMove is the method that is called when the system is loaded.
     override func didMove(to view: SKView) {
-        print("HEGH")
         
         physicsWorld.contactDelegate = self
         score = 0
@@ -93,22 +92,22 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(ground!)
         
         // Initialization of base contactables
-        let coin = CoinBrick(position:CGPoint(x: ball.position.x+200, y: ball.position.y+200), isCoin: true)
-        
-        let gravityWell = GravityWell(position: CGPoint(x: ball.position.x+200, y: ball.position.y-200), isOn: true)
-        
-        let enemyStartPoint = CGPoint(x: ball.position.x+100, y: ball.position.y+100)
-        
-        let enemy = Enemy(typeOfEnemy: Enemy.TypeOfEnemy.basic,position:enemyStartPoint, isOn: true)
-        // A temporary array to store our default contactables
-        let tempContactables : [Contactable] = [coin, gravityWell, enemy]
-        // Adding our temporary array to our list of all contactables
-        currentContactables.append(tempContactables)
+//        let coin = CoinBrick(position:CGPoint(x: ball.position.x+200, y: ball.position.y+200), isCoin: true)
+//
+//        let gravityWell = GravityWell(position: CGPoint(x: ball.position.x+200, y: ball.position.y-200), isOn: true)
+//
+//        let enemyStartPoint = CGPoint(x: ball.position.x+100, y: ball.position.y+100)
+//
+//        let enemy = Enemy(typeOfEnemy: Enemy.TypeOfEnemy.basic,position:enemyStartPoint, isOn: true)
+//        // A temporary array to store our default contactables
+//        let tempContactables : [Contactable] = [coin, gravityWell, enemy]
+//        // Adding our temporary array to our list of all contactables
+//        currentContactables.append(tempContactables)
 
         // Adding all default contactables to the scene
-        for contactable in currentContactables[0] {
-            self.addChild(contactable)
-        }
+//        for contactable in currentContactables[0] {
+//            self.addChild(contactable)
+//        }
         
         myCamera = Camera()
         self.camera = myCamera
@@ -147,7 +146,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
                 let maxMonstersPerPoint = 4
                 let numberMosnters = Int.random(in: 0...maxMonstersPerPoint)
                 
-                for otherIndex in 0 ..< numberMosnters {
+                for _ in 0 ..< numberMosnters {
                     let yBufferDistance = CGFloat(25)
                     let yMaxAwayDistance = CGFloat(1000)
                     let randomY = CGFloat.random(in: (floorPoint.y + yBufferDistance)  ..< floorPoint.y + yMaxAwayDistance)
@@ -377,10 +376,7 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         
         // Update delta time
         deltaTime = currentTime - lastFrameTime
-        
-        // Moving the parallax background with a scaling factor based on player's velocity
-//        par1?.move(scene: self, speed: (ball.physicsBody!.velocity.dx * 0.0001), deltaTime: deltaTime)
-
+    
         
         // Updating score value, based on distance travelled and scaling factor
         score = CGFloat(ball.calculateDistanceTravelled() * scoreScalingFactor).rounded()
@@ -474,27 +470,11 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    
-//    override func didFinishUpdate() {
-//        let xPos = self.size.width/2.0 - ball!.position.x
-//        let yPos = self.size.height/2.0 - ball!.position.y
-//        mainNode?.position = CGPoint(x:xPos,y:yPos)
-//    }
-    
+
     //This kills Gravity and decreaes the speed to a crall. This SHOULD work for SHORT times as long as you don't collide with anything.
-    //TODO: Find better approach or fix this when collisions occur (old velocity will be very wrong in that case
     func lightPause(){
         self.camera?.run(SKAction.scale(by: 1.4, duration: 5.0))
         
-//
-//        guard ball.physicsBody?.velocity != nil else {
-//            return
-//        }
-//        oldSpeed = ball.physicsBody!.velocity
-//        self.physicsWorld.gravity = noGravity
-//        let slowFactor = CGFloat(0.1)
-//        let slowSpeed = CGVector(dx: oldSpeed.dx * slowFactor, dy: oldSpeed.dy * slowFactor)
-//        ball.physicsBody?.velocity = slowSpeed
         deathWall.isMoving = false
         let speedScaleFactor: CGFloat = 0.0
         self.scene?.physicsWorld.speed = speedScaleFactor
@@ -502,24 +482,6 @@ class SampleScene: SKScene, SKPhysicsContactDelegate {
     
     func normalSpeed(){
         self.camera?.run(SKAction.scale(to: 1.0, duration: 0.5))
-//
-//        self.physicsWorld.gravity = self.normalGravity
-//        guard ball.physicsBody?.velocity != nil else {
-//            return
-//        }
-//        //True if BOTH are different directions. If current velicty has flipped, then flip old speed
-//        var dx = oldSpeed.dx
-//        var dy = oldSpeed.dy
-//        if ball.physicsBody!.velocity.dx * oldSpeed.dx < 0 {
-//
-//            dx = -dx
-//        }
-//        if ball.physicsBody!.velocity.dy * oldSpeed.dy < 0 {
-//
-//            dy = -dy
-//        }
-//        ball.physicsBody?.velocity = CGVector(dx: dx, dy: dy)
-        
         deathWall.isMoving = true
         self.scene?.physicsWorld.speed = 1.0
     }
